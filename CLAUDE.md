@@ -6,7 +6,8 @@ Fork of [Open RTS](https://github.com/lampe-games/godot-open-rts) (Godot 4.3, MI
 
 ## Ground rules
 
-- Engine: **Godot 4.3**. Renderer: **GL Compatibility** (target: laptops with Intel UHD graphics).
+- Engine: **Godot 4.3**, and it must also run on **Godot 4.7** (the owner's editor). Renderer:
+  **GL Compatibility** (target: laptops with Intel UHD graphics).
 - Work in phases. After each phase the game must run with **no errors**, then commit and push.
 - Keep the upstream architecture (units are `Area3D` + trait nodes, `Constants.Match.*` tables
   keyed by scene path). Prefer adding small helpers over rewriting systems.
@@ -33,6 +34,16 @@ during the run) must be fixed.
 - Full-screen overlay quads (`fog`, `*_fog_of_war`) must use `depth_test_disabled`; at z=0 they
   sit mid-depth in OpenGL and were being hidden by the scene (half the screen had no fog of war).
 - Use `RenderingServer.get_rendering_device() == null` to detect Compatibility at runtime.
+
+## Navigation gotchas (Godot 4.3 -> 4.7)
+
+- Never call `NavigationServer3D.map_force_update()`: on 4.7 it leaves the map stuck empty
+  (every query returns `Vector3.ZERO`), and unit placement then loops forever (game freeze
+  right after "Setting up a camera...").
+- Do not query a map before its first sync: use `Utils.Match.wait_for_navigation_map()` or check
+  `NavigationServer3D.map_get_iteration_id(map) > 0` (`Movement` skips path queries until then).
+- Bake through `source/match/NavigationBaking.gd` (colliders + CPU-side primitive meshes) instead
+  of `NavigationRegion3D.bake_navigation_mesh()`, which reads visual meshes back from the GPU.
 
 ## Code map (Desert Command additions)
 

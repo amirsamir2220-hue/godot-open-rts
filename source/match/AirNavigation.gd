@@ -1,5 +1,7 @@
 extends Node3D
 
+const NavigationBaking = preload("res://source/match/NavigationBaking.gd")
+
 # air needs to be put on separate map so that air agents do not collide with terrain ones:
 @onready var navigation_map_rid = NavigationServer3D.map_create()
 
@@ -14,7 +16,6 @@ func _ready():
 		navigation_map_rid, Constants.Match.Air.Navmesh.CELL_HEIGHT
 	)
 	NavigationServer3D.region_set_map(_navigation_region.get_region_rid(), navigation_map_rid)
-	NavigationServer3D.map_force_update(navigation_map_rid)
 	NavigationServer3D.map_set_active(navigation_map_rid, true)
 	_reference_mesh.global_transform.origin.y = Constants.Match.Air.Y
 
@@ -28,7 +29,7 @@ func bake(map):
 	plane_mesh.size = map.size
 	plane_mesh.center_offset = Vector3(map.size.x, 0, map.size.y) / 2.0
 	_reference_mesh.mesh = plane_mesh
-	_navigation_region.bake_navigation_mesh(false)
+	NavigationBaking.bake(_navigation_region)
 
 
 func _safety_checks():

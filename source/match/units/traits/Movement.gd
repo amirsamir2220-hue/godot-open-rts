@@ -37,6 +37,8 @@ var _passive_movement_detected = false
 
 
 func _physics_process(delta):
+	if NavigationServer3D.map_get_iteration_id(get_navigation_map()) == 0:
+		return  # navigation map not synchronized yet - path queries would fail
 	_interim_speed = speed * delta
 	var fake_direction = _get_fake_direction_due_to_stuck_prevention()
 	if fake_direction != null:
@@ -74,7 +76,7 @@ func stop():
 
 
 func _align_unit_position_to_navigation():
-	await get_tree().process_frame  # wait for navigation to be operational
+	await Utils.Match.wait_for_navigation_map(self, get_navigation_map())
 	_unit.global_transform.origin = (
 		NavigationServer3D.map_get_closest_point(
 			get_navigation_map(), get_parent().global_transform.origin

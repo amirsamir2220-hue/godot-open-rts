@@ -1,5 +1,7 @@
 extends Node3D
 
+const NavigationBaking = preload("res://source/match/NavigationBaking.gd")
+
 const DOMAIN = Constants.Match.Navigation.Domain.TERRAIN
 
 var _earliest_frame_to_perform_next_rebake = null
@@ -18,9 +20,7 @@ func _ready():
 	NavigationServer3D.map_set_cell_height(
 		navigation_map_rid, Constants.Match.Terrain.Navmesh.CELL_HEIGHT
 	)
-	NavigationServer3D.map_force_update(navigation_map_rid)
 	MatchSignals.schedule_navigation_rebake.connect(_on_schedule_navigation_rebake)
-	_navigation_region.bake_finished.connect(_on_bake_finished)
 
 
 func _process(_delta):
@@ -31,7 +31,7 @@ func _process(_delta):
 	):
 		_is_baking = true
 		_earliest_frame_to_perform_next_rebake = null
-		_navigation_region.bake_navigation_mesh(true)
+		NavigationBaking.bake_async(_navigation_region, _on_bake_finished)
 
 
 func bake():
@@ -39,7 +39,7 @@ func bake():
 		_navigation_region.navigation_mesh.get_polygon_count() == 0,
 		"bake() should be called exactly once - during runtime"
 	)
-	_navigation_region.bake_navigation_mesh(false)
+	NavigationBaking.bake(_navigation_region)
 
 
 func _safety_checks():

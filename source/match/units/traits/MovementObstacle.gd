@@ -8,8 +8,10 @@ extends NavigationObstacle3D
 
 
 func _ready():
-	await get_tree().process_frame  # wait for navigation to be operational
-	set_navigation_map(_match.navigation.get_navigation_map_rid_by_domain(domain))
+	await get_tree().process_frame  # wait for the match (and its navigation) to be ready
+	var navigation_map_rid = _match.navigation.get_navigation_map_rid_by_domain(domain)
+	await Utils.Match.wait_for_navigation_map(self, navigation_map_rid)
+	set_navigation_map(navigation_map_rid)
 	_align_unit_position_to_navigation()
 
 
