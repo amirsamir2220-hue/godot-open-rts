@@ -8,6 +8,7 @@ const ModelKit = preload("res://source/match/units/models/ModelKit.gd")
 const UsaModels = preload("res://source/match/units/models/UsaModels.gd")
 const RussiaModels = preload("res://source/match/units/models/RussiaModels.gd")
 const NeutralModels = preload("res://source/match/units/models/NeutralModels.gd")
+const RealisticModels = preload("res://source/match/units/models/RealisticModels.gd")
 
 const NEUTRAL = "neutral"
 
@@ -19,7 +20,8 @@ static var _cache = {}
 
 
 static func has_model(type, faction):
-	return _builders_for(faction).has(type) or MODEL_OVERRIDES.has(_key(type, faction))
+	var key = _key(type, faction)
+	return _builders_for(faction).has(type) or MODEL_OVERRIDES.has(key) or RealisticModels.has(key)
 
 
 ## Returns a new model instance (Node3D) or null if there is no model for that unit type.
@@ -29,16 +31,13 @@ static func build(type, faction):
 		var scene = null
 		if key in MODEL_OVERRIDES:
 			scene = load(MODEL_OVERRIDES[key])
+		elif RealisticModels.has(key):
+			scene = _pack(RealisticModels.build(key))
 		else:
 			var builders = _builders_for(faction)
 			if not builders.has(type):
 				return null
-			var root = builders[type].call()
-			root.name = "Model"
-			_set_owner_recursively(root, root)
-			scene = PackedScene.new()
-			scene.pack(root)
-			root.free()
+			scene = _pack(builders[type].call())
 		_cache[key] = scene
 	return _cache[key].instantiate()
 
@@ -88,6 +87,15 @@ static func retarget_turret(unit, model):
 	var rotator = unit.find_child("RotateRandomly*")
 	if rotator != null:
 		rotator.node_to_rotate = rotator.get_path_to(turret)
+
+
+static func _pack(root):
+	root.name = "Model"
+	_set_owner_recursively(root, root)
+	var scene = PackedScene.new()
+	scene.pack(root)
+	root.free()
+	return scene
 
 
 static func _key(type, faction):

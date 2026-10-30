@@ -1,0 +1,11 @@
+Model Information:
+* title:	9M133 Kornet / AT-14 Spriggan
+* source:	https://sketchfab.com/3d-models/9m133-kornet-at-14-spriggan-8b1d8e081c9744598b2ec4127d1c72df
+* author:	XEPCOH_552 (https://sketchfab.com/NOOBik_01)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "9M133 Kornet / AT-14 Spriggan" (https://sketchfab.com/3d-models/9m133-kornet-at-14-spriggan-8b1d8e081c9744598b2ec4127d1c72df) by XEPCOH_552 (https://sketchfab.com/NOOBik_01) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

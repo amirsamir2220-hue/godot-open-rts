@@ -95,16 +95,31 @@ during the run) must be fixed.
 - In-match "How to play" panel (`hud/ControlsHelp.gd`, H key or "?" button).
 - Fog of war is see-through (`max_opacity` 0.8, explored areas lighter) so the map stays readable.
 
-### Phase 3C - Realistic models (next, needs assets)
-- The owner wants **realistic, not cartoon** models. Code-built models stay as fallback.
-- Sources: Sketchfab (CC BY, downloadable, low face count) is the main candidate; the cloud
-  environment must allow `sketchfab.com` / `api.sketchfab.com` and downloads need the owner's
-  free Sketchfab API token. Otherwise the owner downloads `.glb` files and uploads them to
-  `assets/models/realistic/<faction>/<Type>.glb` via GitHub.
-- Budget per unit for Intel UHD: about 2-8k triangles, 1-2 materials, textures <= 1024 px.
-- Integrate through `FactionModels.MODEL_OVERRIDES` with a wrapper scene per model that fixes
-  scale/orientation (-Z forward) and provides `Turret`, `Rotor`, `ProjectileOrigin` nodes.
-- Credit every CC BY model in `LOGO_LICENSES.md`/Credits.
+### Phase 3C - Realistic unit models (done)
+- 11 realistic CC BY models from Sketchfab in `assets/models/realistic/<faction>/<Type>/`
+  (credits: `assets/models/realistic/CREDITS.md`, also on the Credits screen). The USA drone
+  and all buildings are still code-built.
+- Offline prep (scripts kept outside the repo): parts split by height into `Turret*` /
+  `Rotor*` nodes where the source merged them (Abrams turret, Apache rotor, T-90 gun),
+  roles via node names (`Turret*`, `Rotor*`, `Prop*`, `Drop*`), textures <= 1024 px.
+- `models/RealisticModels.gd` fits each file at build time (forward axis -> -Z, length in game
+  units, ground/air/base mount), builds `Turret` / `Rotor` / `Propeller` pivots and
+  `ProjectileOrigin`, adds coaxial blades to the Ka-52 and a team-color pennant to ground
+  units. `FactionModels.build()` prefers it over the code-built model when the file exists.
+- Sketchfab downloads need the owner's API token: keep it out of the repo (temporary file only).
+
+### Phase 3D - Realistic buildings (next)
+- Replace the code-built Command HQ, War factory, Helipad (and later new buildings) with
+  realistic military structures (CC BY / CC0), same pipeline as Phase 3C.
+
+### Phase 3E - New units: Humvee / jeep, infantry, fighter jets (next)
+- Light vehicle: USA HMMWV (Humvee) / Russia GAZ Tigr - fast scout/raider with a machine gun,
+  built at the War factory.
+- Infantry: rifleman + anti-tank soldier per faction (squads of small units) from a Barracks.
+- Fighter jets (owner's wish list): USA F-15, F-16, F-35 / Russia MiG-29, Su-35, Su-57, from an
+  Airfield; strike runs against ground and air targets.
+- Each new unit needs: scene + script (copying the closest existing unit), DEFAULT_PROPERTIES,
+  costs/times, menu button + icon + names, AI support, realistic model.
 
 ### Phase 3 - Models
 Low-poly models per faction for all 9 unit types:
@@ -214,7 +229,9 @@ Design rules:
 - [x] Phase 2C - Sandbox mode, AI difficulty, controls help
 - [x] Phase 3 - Models
 - [x] Phase 3B - Motion
-- [ ] Phase 3C - Realistic models (waiting for asset access)
+- [x] Phase 3C - Realistic unit models
+- [ ] Phase 3D - Realistic buildings
+- [ ] Phase 3E - New units: Humvee/Tigr, infantry, fighter jets
 - [x] Phase 4 - UI
 - [x] Phase 5 - Desert look
 - [ ] Phase 6 - Graphics settings menu
