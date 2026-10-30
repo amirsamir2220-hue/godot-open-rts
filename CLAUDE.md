@@ -108,18 +108,27 @@ during the run) must be fixed.
   units. `FactionModels.build()` prefers it over the code-built model when the file exists.
 - Sketchfab downloads need the owner's API token: keep it out of the repo (temporary file only).
 
-### Phase 3D - Realistic buildings (next)
-- Replace the code-built Command HQ, War factory, Helipad (and later new buildings) with
-  realistic military structures (CC BY / CC0), same pipeline as Phase 3C.
+### Phase 3D - Realistic buildings (done)
+- Command HQ, War factory (Quonset hut), Helipad (heliport) are shared realistic models for both
+  factions (`assets/models/realistic/neutral/`, `RealisticModels.NEUTRAL_STRUCTURES`); Barracks
+  are per faction (USA brick barracks, Russia army tent). Structures get a team-color flag on a pole.
+- Offline prep (kept outside the repo) now also merges all parts per material (fewer draw calls),
+  drops ground planes ("Drop" role), converts opaque textures to JPEG and bakes a weapon-holding
+  pose into T-pose soldiers (arm vertices rotated around the shoulders, skin removed).
 
-### Phase 3E - New units: Humvee / jeep, infantry, fighter jets (next)
-- Light vehicle: USA HMMWV (Humvee) / Russia GAZ Tigr - fast scout/raider with a machine gun,
-  built at the War factory.
-- Infantry: rifleman + anti-tank soldier per faction (squads of small units) from a Barracks.
-- Fighter jets (owner's wish list): USA F-15, F-16, F-35 / Russia MiG-29, Su-35, Su-57, from an
-  Airfield; strike runs against ground and air targets.
-- Each new unit needs: scene + script (copying the closest existing unit), DEFAULT_PROPERTIES,
-  costs/times, menu button + icon + names, AI support, realistic model.
+### Phase 3E - New units (done)
+- `Humvee` (USA HMMWV / Russia GAZ Tigr, War factory), `Rifleman` and `AntiTankSoldier` (Barracks),
+  `Fighter` / `StrikeFighter` / `StealthFighter` (F-16 / F-15 / F-35 and MiG-29 / Su-35 / Su-57,
+  Airfield). New structures: `Barracks`, `Airfield` (built by the supply truck).
+- Ground units extend `Tank.gd`, jets extend `Fighter.gd` (an air unit without rotor), so the AI
+  and auto-attack treat them as combat units. Unit `type` comes from the script file name.
+- AI: `SimpleClairvoyantAI.OffensiveStructure` has BARRACKS / AIRFIELD; each offensive structure
+  trains a random unit from its list (`OffenseController.OFFENSIVE_STRUCTURES`). The secondary
+  structure is set per difficulty (Easy: Barracks, Normal/Hard: Airfield).
+- Menus are generated with buttons first in a 4x3 grid (slot 3 = Cancel), so nothing lands in a
+  cropped bottom row.
+- Soldiers carry a code-built rifle/RPG and a team-color patch (`RealisticModels`), jets fly with
+  the PLANE motion. Later: jets doing strike runs from the Airfield, squads of soldiers.
 
 ### Phase 3 - Models
 Low-poly models per faction for all 9 unit types:
@@ -230,8 +239,8 @@ Design rules:
 - [x] Phase 3 - Models
 - [x] Phase 3B - Motion
 - [x] Phase 3C - Realistic unit models
-- [ ] Phase 3D - Realistic buildings
-- [ ] Phase 3E - New units: Humvee/Tigr, infantry, fighter jets
+- [x] Phase 3D - Realistic buildings
+- [x] Phase 3E - New units: Humvee/Tigr, infantry, fighter jets
 - [x] Phase 4 - UI
 - [x] Phase 5 - Desert look
 - [ ] Phase 6 - Graphics settings menu

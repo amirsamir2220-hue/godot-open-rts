@@ -1,0 +1,11 @@
+Model Information:
+* title:	GAZ-2975 Tigr
+* source:	https://sketchfab.com/3d-models/gaz-2975-tigr-3822ce58f7534f4fa1c032d750ac0246
+* author:	maxwikdahl (https://sketchfab.com/maxwikdahl)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "GAZ-2975 Tigr" (https://sketchfab.com/3d-models/gaz-2975-tigr-3822ce58f7534f4fa1c032d750ac0246) by maxwikdahl (https://sketchfab.com/maxwikdahl) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

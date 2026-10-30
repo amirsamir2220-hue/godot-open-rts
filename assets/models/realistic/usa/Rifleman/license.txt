@@ -1,0 +1,11 @@
+Model Information:
+* title:	US Marine
+* source:	https://sketchfab.com/3d-models/us-marine-c998c2326ef54cd8adac046599d82012
+* author:	doctortex (https://sketchfab.com/doctortex)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "US Marine" (https://sketchfab.com/3d-models/us-marine-c998c2326ef54cd8adac046599d82012) by doctortex (https://sketchfab.com/doctortex) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

@@ -5,7 +5,8 @@
 #   GROUND  - hull slews towards the heading, pitches on acceleration/braking, leans in turns;
 #             a "Turret" tracks the current target independently of the hull.
 #   HELI    - nose dips with speed, banks into turns, hovers with a slight bob.
-#   PLANE   - banks harder into turns, gentle bob.
+#   PLANE   - banks harder into turns, gentle bob; when it stops, the model keeps flying a small
+#             banked circle around the unit (jets and drones never hover).
 #   TURRET  - (detached structure turrets) "Turret" slews towards "TurretAim", which is what
 #             the unit's RotationSynchronizer and idle rotator drive.
 # Every kind gets recoil and a muzzle flash at "ProjectileOrigin" when a projectile is fired.
@@ -13,7 +14,13 @@ extends Node
 
 enum Kind { GROUND, HELI, PLANE, TURRET }
 
-const HULL_TURN_RATE = {"Tank": deg_to_rad(160.0), "Worker": deg_to_rad(260.0)}
+const HULL_TURN_RATE = {
+	"Tank": deg_to_rad(160.0),
+	"Worker": deg_to_rad(260.0),
+	"Humvee": deg_to_rad(300.0),
+	"Rifleman": deg_to_rad(420.0),
+	"AntiTankSoldier": deg_to_rad(420.0),
+}
 const DEFAULT_HULL_TURN_RATE = deg_to_rad(220.0)
 const TURRET_TURN_RATE = deg_to_rad(150.0)
 const STRUCTURE_TURRET_TURN_RATE = deg_to_rad(220.0)
@@ -22,6 +29,8 @@ const SMOOTHING = 8.0  # 1/s, for velocity/pitch/roll filters
 const MUZZLE_FLASH_TIME_S = 0.07
 const RECOIL_DISTANCE = 0.09
 const RECOIL_RECOVERY = 6.0  # 1/s
+const LOITER_RADIUS = 0.7
+const LOITER_SPEED = 1.3  # rad/s
 
 static var _muzzle_flash_material = null
 static var _muzzle_flash_mesh = null
@@ -50,6 +59,8 @@ var _pitch = 0.0
 var _roll = 0.0
 var _turret_yaw = null
 var _time = randf() * 10.0
+var _loiter = 0.0
+var _loiter_angle = randf() * TAU
 
 
 static func kind_for(unit):
@@ -92,7 +103,7 @@ func _process(delta):
 		Kind.HELI:
 			_update_air(delta, 0.09, 0.3, 0.32, 0.045, 1.6)
 		Kind.PLANE:
-			_update_air(delta, 0.03, 0.5, 0.6, 0.025, 2.2)
+			_update_air(delta, 0.03, 0.5, 0.6, 0.025, 2.2, true)
 
 
 func _update_kinematics(delta):
@@ -149,20 +160,33 @@ func _update_vehicle_turret(delta):
 	_turret.rotation.y = angle_difference(_hull_yaw, _turret_yaw)
 
 
-func _update_air(delta, pitch_per_speed, max_pitch, bank_per_yaw_rate, bob, bob_speed):
+func _update_air(
+	delta, pitch_per_speed, max_pitch, bank_per_yaw_rate, bob, bob_speed, loiters = false
+):
 	var unit_yaw = _unit.global_rotation.y
 	if _hull_yaw == null:
 		_hull_yaw = unit_yaw
 		_last_hull_yaw = unit_yaw
 	_hull_yaw = _rotate_angle_toward(_hull_yaw, unit_yaw, deg_to_rad(300.0) * delta)
-	var yaw_rate = angle_difference(_last_hull_yaw, _hull_yaw) / max(delta, 0.0001)
-	_last_hull_yaw = _hull_yaw
-	var forward = Vector3(-sin(_hull_yaw), 0, -cos(_hull_yaw))
-	var forward_speed = _velocity.dot(forward)
+	var yaw = _hull_yaw
+	var offset = Vector3.ZERO
+	if loiters:
+		var idle = _speed < MOVING_SPEED_THRESHOLD * 4.0
+		_loiter = move_toward(_loiter, 1.0 if idle else 0.0, delta * 0.7)
+		_loiter_angle = fmod(_loiter_angle + LOITER_SPEED * delta, TAU)
+		var radius = LOITER_RADIUS * smoothstep(0.0, 1.0, _loiter)
+		offset = Vector3(cos(_loiter_angle), 0, sin(_loiter_angle)) * radius
+		var tangent = Vector3(-sin(_loiter_angle), 0, cos(_loiter_angle))
+		yaw = lerp_angle(_hull_yaw, atan2(-tangent.x, -tangent.z), smoothstep(0.0, 1.0, _loiter))
+	var yaw_rate = angle_difference(_last_hull_yaw, yaw) / max(delta, 0.0001)
+	_last_hull_yaw = yaw
+	var forward = Vector3(-sin(yaw), 0, -cos(yaw))
+	var forward_speed = _velocity.dot(forward) + LOITER_RADIUS * LOITER_SPEED * _loiter
 	var k = 1.0 - exp(-SMOOTHING * 0.5 * delta)
 	_pitch = lerp(_pitch, clamp(-forward_speed * pitch_per_speed, -max_pitch, max_pitch), k)
 	_roll = lerp(_roll, clamp(yaw_rate * bank_per_yaw_rate, -0.6, 0.6), k)
-	_model.rotation = Vector3(_pitch + _kick_pitch, angle_difference(unit_yaw, _hull_yaw), _roll)
+	_model.rotation = Vector3(_pitch + _kick_pitch, angle_difference(unit_yaw, yaw), _roll)
+	_model.position = Basis(Vector3.UP, -unit_yaw) * offset
 	_model.position.y = sin(_time * bob_speed) * bob
 
 

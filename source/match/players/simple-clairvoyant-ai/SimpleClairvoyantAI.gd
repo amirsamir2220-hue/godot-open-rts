@@ -1,7 +1,7 @@
 extends "res://source/match/players/Player.gd"
 
 enum ResourceRequestPriority { LOW, MEDIUM, HIGH }
-enum OffensiveStructure { VEHICLE_FACTORY, AIRCRAFT_FACTORY }
+enum OffensiveStructure { VEHICLE_FACTORY, AIRCRAFT_FACTORY, BARRACKS, AIRFIELD }
 
 @export var expected_number_of_workers = 3
 @export var expected_number_of_ccs = 1

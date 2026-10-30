@@ -16,6 +16,14 @@ const TEXT_KEYS = {
 	"AircraftFactory": "AIRCRAFT_FACTORY",
 	"AntiGroundTurret": "AG_TURRET",
 	"AntiAirTurret": "AA_TURRET",
+	"Humvee": "HUMVEE",
+	"Rifleman": "RIFLEMAN",
+	"AntiTankSoldier": "AT_SOLDIER",
+	"Fighter": "FIGHTER",
+	"StrikeFighter": "STRIKE_FIGHTER",
+	"StealthFighter": "STEALTH_FIGHTER",
+	"Barracks": "BARRACKS",
+	"Airfield": "AIRFIELD",
 }
 
 static var _icon_cache = {}

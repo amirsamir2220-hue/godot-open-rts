@@ -1,0 +1,11 @@
+Model Information:
+* title:	Sukhoi PAK FA T-50
+* source:	https://sketchfab.com/3d-models/sukhoi-pak-fa-t-50-bcf91a46d8114bbeb250b3c114a90e41
+* author:	42manako (https://sketchfab.com/42manako)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Sukhoi PAK FA T-50" (https://sketchfab.com/3d-models/sukhoi-pak-fa-t-50-bcf91a46d8114bbeb250b3c114a90e41) by 42manako (https://sketchfab.com/42manako) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

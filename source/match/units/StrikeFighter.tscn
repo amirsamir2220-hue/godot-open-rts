@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://source/match/units/StrikeFighter.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://cgsi062w5fjia" path="res://source/match/units/traits/Highlight.tscn" id="t_Highlight"]
+[ext_resource type="PackedScene" uid="uid://3c1h14nqdumt" path="res://source/match/units/traits/Selection.tscn" id="t_Selection"]
+[ext_resource type="PackedScene" uid="uid://ivlo0e66qocl" path="res://source/match/units/traits/Movement.tscn" id="t_Movement"]
+[ext_resource type="PackedScene" uid="uid://c3ssj2p6voauk" path="res://source/match/units/traits/HealthBar.tscn" id="t_HealthBar"]
+[ext_resource type="PackedScene" uid="uid://d4cm4yhtf11ur" path="res://source/match/units/traits/Targetability.tscn" id="t_Targetability"]
+[ext_resource type="PackedScene" uid="uid://b1r67ex7h3veu" path="res://source/match/units/traits/AirToTerrainMarker.tscn" id="t_AirToTerrainMarker"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_body"]
+height = 0.5
+radius = 0.8
+
+[node name="StrikeFighter" type="Area3D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_script")
+
+[node name="Geometry" type="Node3D" parent="."]
+
+[node name="ProjectileOrigin" type="Marker3D" parent="Geometry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.7)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+shape = SubResource("CylinderShape3D_body")
+
+[node name="Highlight" parent="." instance=ExtResource("t_Highlight")]
+radius = 0.8
+
+[node name="Selection" parent="." instance=ExtResource("t_Selection")]
+radius = 0.8
+
+[node name="Movement" parent="." instance=ExtResource("t_Movement")]
+path_desired_distance = 0.1
+target_desired_distance = 0.1
+path_height_offset = 0.5
+radius = 0.8
+neighbor_distance = 8.0
+max_neighbors = 40
+domain = 0
+speed = 5.5
+
+[node name="HealthBar" parent="." instance=ExtResource("t_HealthBar")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+size = Vector2(140, 10)
+
+[node name="AirToTerrainMarker" parent="." instance=ExtResource("t_AirToTerrainMarker")]
+
+[node name="Targetability" parent="." instance=ExtResource("t_Targetability")]
+radius = 0.8

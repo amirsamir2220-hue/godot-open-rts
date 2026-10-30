@@ -1,0 +1,11 @@
+Model Information:
+* title:	F-15 Model
+* source:	https://sketchfab.com/3d-models/f-15-model-f945dc1fc12e4fd9a3c88a9676ff60a0
+* author:	AConnorB (https://sketchfab.com/AConnorB)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "F-15 Model" (https://sketchfab.com/3d-models/f-15-model-f945dc1fc12e4fd9a3c88a9676ff60a0) by AConnorB (https://sketchfab.com/AConnorB) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

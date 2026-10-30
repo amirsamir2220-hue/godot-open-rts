@@ -19,6 +19,14 @@ const TYPES = [
 	"AircraftFactory",
 	"AntiGroundTurret",
 	"AntiAirTurret",
+	"Humvee",
+	"Rifleman",
+	"AntiTankSoldier",
+	"Fighter",
+	"StrikeFighter",
+	"StealthFighter",
+	"Barracks",
+	"Airfield",
 ]
 const NEUTRAL_TYPES = ["ResourceA", "ResourceB"]
 const VIEW_DIRECTION = Vector3(-1.0, 0.9, -1.0)  # from the front-left, like the match camera

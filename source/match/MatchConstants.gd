@@ -59,6 +59,36 @@ class Resources:
 
 class Units:
 	const PRODUCTION_COSTS = {
+		"res://source/match/units/Humvee.tscn":
+		{
+			"resource_a": 2,
+			"resource_b": 1,
+		},
+		"res://source/match/units/Rifleman.tscn":
+		{
+			"resource_a": 1,
+			"resource_b": 0,
+		},
+		"res://source/match/units/AntiTankSoldier.tscn":
+		{
+			"resource_a": 2,
+			"resource_b": 0,
+		},
+		"res://source/match/units/Fighter.tscn":
+		{
+			"resource_a": 2,
+			"resource_b": 4,
+		},
+		"res://source/match/units/StrikeFighter.tscn":
+		{
+			"resource_a": 3,
+			"resource_b": 5,
+		},
+		"res://source/match/units/StealthFighter.tscn":
+		{
+			"resource_a": 4,
+			"resource_b": 6,
+		},
 		"res://source/match/units/Worker.tscn":
 		{
 			"resource_a": 2,
@@ -81,6 +111,12 @@ class Units:
 		},
 	}
 	const PRODUCTION_TIMES = {
+		"res://source/match/units/Humvee.tscn": 4.0,
+		"res://source/match/units/Rifleman.tscn": 2.5,
+		"res://source/match/units/AntiTankSoldier.tscn": 3.5,
+		"res://source/match/units/Fighter.tscn": 8.0,
+		"res://source/match/units/StrikeFighter.tscn": 10.0,
+		"res://source/match/units/StealthFighter.tscn": 12.0,
 		"res://source/match/units/Worker.tscn": 3.0,
 		"res://source/match/units/Helicopter.tscn": 6.0,
 		"res://source/match/units/Drone.tscn": 3.0,
@@ -88,6 +124,10 @@ class Units:
 	}
 	const PRODUCTION_QUEUE_LIMIT = 5
 	const STRUCTURE_BLUEPRINTS = {
+		"res://source/match/units/Barracks.tscn":
+		"res://source/match/units/structure-geometries/VehicleFactory.tscn",
+		"res://source/match/units/Airfield.tscn":
+		"res://source/match/units/structure-geometries/AircraftFactory.tscn",
 		"res://source/match/units/CommandCenter.tscn":
 		"res://source/match/units/structure-geometries/CommandCenter.tscn",
 		"res://source/match/units/VehicleFactory.tscn":
@@ -100,6 +140,16 @@ class Units:
 		"res://source/match/units/structure-geometries/AntiAirTurret.tscn",
 	}
 	const CONSTRUCTION_COSTS = {
+		"res://source/match/units/Barracks.tscn":
+		{
+			"resource_a": 4,
+			"resource_b": 0,
+		},
+		"res://source/match/units/Airfield.tscn":
+		{
+			"resource_a": 6,
+			"resource_b": 6,
+		},
 		"res://source/match/units/CommandCenter.tscn":
 		{
 			"resource_a": 8,
@@ -127,6 +177,78 @@ class Units:
 		},
 	}
 	const DEFAULT_PROPERTIES = {
+		"res://source/match/units/Humvee.tscn":
+		{
+			"sight_range": 9.0,
+			"hp": 7,
+			"hp_max": 7,
+			"attack_damage": 1,
+			"attack_interval": 0.4,
+			"attack_range": 4.5,
+			"attack_domains": [Navigation.Domain.TERRAIN, Navigation.Domain.AIR],
+		},
+		"res://source/match/units/Rifleman.tscn":
+		{
+			"sight_range": 6.0,
+			"hp": 3,
+			"hp_max": 3,
+			"attack_damage": 1,
+			"attack_interval": 0.8,
+			"attack_range": 4.0,
+			"attack_domains": [Navigation.Domain.TERRAIN],
+		},
+		"res://source/match/units/AntiTankSoldier.tscn":
+		{
+			"sight_range": 6.0,
+			"hp": 3,
+			"hp_max": 3,
+			"attack_damage": 3,
+			"attack_interval": 2.0,
+			"attack_range": 5.0,
+			"attack_domains": [Navigation.Domain.TERRAIN],
+		},
+		"res://source/match/units/Fighter.tscn":
+		{
+			"sight_range": 10.0,
+			"hp": 8,
+			"hp_max": 8,
+			"attack_damage": 2,
+			"attack_interval": 0.8,
+			"attack_range": 6.0,
+			"attack_domains": [Navigation.Domain.TERRAIN, Navigation.Domain.AIR],
+		},
+		"res://source/match/units/StrikeFighter.tscn":
+		{
+			"sight_range": 10.0,
+			"hp": 12,
+			"hp_max": 12,
+			"attack_damage": 3,
+			"attack_interval": 1.0,
+			"attack_range": 6.0,
+			"attack_domains": [Navigation.Domain.TERRAIN, Navigation.Domain.AIR],
+		},
+		"res://source/match/units/StealthFighter.tscn":
+		{
+			"sight_range": 12.0,
+			"hp": 10,
+			"hp_max": 10,
+			"attack_damage": 4,
+			"attack_interval": 1.2,
+			"attack_range": 7.0,
+			"attack_domains": [Navigation.Domain.TERRAIN, Navigation.Domain.AIR],
+		},
+		"res://source/match/units/Barracks.tscn":
+		{
+			"sight_range": 8.0,
+			"hp": 14,
+			"hp_max": 14,
+		},
+		"res://source/match/units/Airfield.tscn":
+		{
+			"sight_range": 10.0,
+			"hp": 18,
+			"hp_max": 18,
+		},
 		"res://source/match/units/Drone.tscn":
 		{
 			"sight_range": 10.0,
@@ -200,6 +322,17 @@ class Units:
 		},
 	}
 	const PROJECTILES = {
+		"res://source/match/units/Humvee.tscn":
+		"res://source/match/units/projectiles/CannonShell.tscn",
+		"res://source/match/units/Rifleman.tscn":
+		"res://source/match/units/projectiles/CannonShell.tscn",
+		"res://source/match/units/AntiTankSoldier.tscn":
+		"res://source/match/units/projectiles/Rocket.tscn",
+		"res://source/match/units/Fighter.tscn": "res://source/match/units/projectiles/Rocket.tscn",
+		"res://source/match/units/StrikeFighter.tscn":
+		"res://source/match/units/projectiles/Rocket.tscn",
+		"res://source/match/units/StealthFighter.tscn":
+		"res://source/match/units/projectiles/Rocket.tscn",
 		"res://source/match/units/Helicopter.tscn":
 		"res://source/match/units/projectiles/Rocket.tscn",
 		"res://source/match/units/Tank.tscn":

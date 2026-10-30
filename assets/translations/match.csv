@@ -26,7 +26,7 @@ AA_TURRET_DESCRIPTION,"SAM system, fights air targets","zestaw rakietowy, zwalcz
 CC,Command HQ,Kwatera główna
 CC_DESCRIPTION,produces supply trucks,produkuje ciężarówki zaopatrzenia
 VEHICLE_FACTORY,War factory,Fabryka wojenna
-VEHICLE_FACTORY_DESCRIPTION,produces tanks,produkuje czołgi
+VEHICLE_FACTORY_DESCRIPTION,produces tanks and light vehicles,produkuje czołgi i lekkie pojazdy
 AIRCRAFT_FACTORY,Helipad,Lądowisko
 AIRCRAFT_FACTORY_DESCRIPTION,produces helicopters and drones,produkuje śmigłowce i drony
 FACTION_USA,USA,USA
@@ -55,7 +55,39 @@ HELP_ZOOM_ROTATE,"Zoom: mouse wheel. Rotate: Q / E, or hold the middle mouse but
 HELP_SELECT,"Select: left-click a unit or drag a box around units. Double-click selects all units of that kind. Hold Shift to add.","Zaznaczanie: lewy klik lub przeciągnij ramkę. Podwójny klik zaznacza wszystkie jednostki tego typu. Shift dodaje."
 HELP_MOVE_ATTACK,"Move / attack: right-click the ground or an enemy.","Ruch / atak: prawy klik na ziemi lub wrogu."
 HELP_BUILD,"Build: select a supply truck, pick a building in the bottom-right panel, left-click to place it (R rotates, right-click cancels).","Budowa: zaznacz ciężarówkę, wybierz budynek w panelu w prawym dolnym rogu, lewy klik stawia (R obraca, prawy klik anuluje)."
-HELP_TRAIN,"Train units: select the Command HQ, War factory or Helipad and click a unit button.","Produkcja: zaznacz kwaterę główną, fabrykę lub lądowisko i kliknij przycisk jednostki."
+HELP_TRAIN,"Train units: select the Command HQ, War factory, Barracks, Helipad or Airfield and click a unit button.","Produkcja: zaznacz kwaterę główną, fabrykę, koszary, lądowisko lub lotnisko i kliknij przycisk jednostki."
 HELP_RESOURCES,"Supplies and fuel: supply trucks collect them from crates and drums automatically.","Zaopatrzenie i paliwo: ciężarówki same zbierają je ze skrzyń i beczek."
 HELP_GROUPS,"Groups: Ctrl + 1..9 saves a group, 1..9 selects it. Esc: menu. H: this help.","Grupy: Ctrl + 1..9 zapisuje grupę, 1..9 ją zaznacza. Esc: menu. H: ta pomoc."
 HELP_CLOSE,Got it,Rozumiem
+HUMVEE,Light armored vehicle,Lekki pojazd opancerzony
+HUMVEE_DESCRIPTION,"fast scout with a heavy machine gun, fights ground and air targets","szybki zwiadowca z ciężkim karabinem, zwalcza cele naziemne i powietrzne"
+RIFLEMAN,Rifleman,Strzelec
+RIFLEMAN_DESCRIPTION,"cheap infantry, fights ground targets","tania piechota, zwalcza cele naziemne"
+AT_SOLDIER,Anti-tank soldier,Żołnierz przeciwpancerny
+AT_SOLDIER_DESCRIPTION,"missile infantry, strong against vehicles","piechota z pociskami, skuteczna przeciw pojazdom"
+FIGHTER,Multirole fighter,Myśliwiec wielozadaniowy
+FIGHTER_DESCRIPTION,"fast jet, fights ground and air targets","szybki odrzutowiec, zwalcza cele naziemne i powietrzne"
+STRIKE_FIGHTER,Air superiority fighter,Myśliwiec przewagi powietrznej
+STRIKE_FIGHTER_DESCRIPTION,"heavy jet, tough with a big payload","ciężki odrzutowiec, wytrzymały i silnie uzbrojony"
+STEALTH_FIGHTER,Stealth fighter,Myśliwiec stealth
+STEALTH_FIGHTER_DESCRIPTION,"5th generation jet, long range and hard hitting","odrzutowiec 5. generacji, duży zasięg i siła ognia"
+BARRACKS,Barracks,Koszary
+BARRACKS_DESCRIPTION,trains infantry,szkoli piechotę
+AIRFIELD,Airfield,Lotnisko
+AIRFIELD_DESCRIPTION,produces fighter jets,produkuje myśliwce
+USA_HUMVEE,HMMWV Humvee,HMMWV Humvee
+RUSSIA_HUMVEE,GAZ Tigr,GAZ Tigr
+USA_RIFLEMAN,US Marine rifleman,Strzelec piechoty morskiej USA
+RUSSIA_RIFLEMAN,Russian rifleman,Rosyjski strzelec
+USA_AT_SOLDIER,Javelin team,Zespół Javelin
+RUSSIA_AT_SOLDIER,RPG-29 gunner,Strzelec RPG-29
+USA_FIGHTER,F-16 Fighting Falcon,F-16 Fighting Falcon
+RUSSIA_FIGHTER,MiG-29 Fulcrum,MiG-29 Fulcrum
+USA_STRIKE_FIGHTER,F-15 Eagle,F-15 Eagle
+RUSSIA_STRIKE_FIGHTER,Su-35 Flanker-E,Su-35 Flanker-E
+USA_STEALTH_FIGHTER,F-35 Lightning II,F-35 Lightning II
+RUSSIA_STEALTH_FIGHTER,Su-57 Felon,Su-57 Felon
+USA_BARRACKS,Barracks,Koszary
+RUSSIA_BARRACKS,Barracks,Koszary
+USA_AIRFIELD,Airfield,Lotnisko
+RUSSIA_AIRFIELD,Airfield,Lotnisko

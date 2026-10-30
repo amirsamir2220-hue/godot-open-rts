@@ -1,0 +1,11 @@
+Model Information:
+* title:	Runway and Hangar
+* source:	https://sketchfab.com/3d-models/runway-and-hangar-cf6a8925f591421a9b82c28c61ad4c47
+* author:	Derek.Dziedzic (https://sketchfab.com/Derek.Dziedzic)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Runway and Hangar" (https://sketchfab.com/3d-models/runway-and-hangar-cf6a8925f591421a9b82c28c61ad4c47) by Derek.Dziedzic (https://sketchfab.com/Derek.Dziedzic) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

@@ -61,10 +61,13 @@ class AiDifficulty:
 		NORMAL: "DIFFICULTY_NORMAL",
 		HARD: "DIFFICULTY_HARD",
 	}
-	# applied to every AI player; build_speed scales its production and construction
+	# applied to every AI player; build_speed scales its production and construction;
+	# secondary_offensive_structure: SimpleClairvoyantAI.OffensiveStructure
+	# (0 war factory, 1 helipad, 2 barracks, 3 airfield)
 	const SETTINGS = {
 		EASY:
 		{
+			"secondary_offensive_structure": 2,
 			"start_delay_s": 120.0,
 			"build_speed": 0.5,
 			"expected_number_of_ag_turrets": 1,
@@ -74,6 +77,7 @@ class AiDifficulty:
 		},
 		NORMAL:
 		{
+			"secondary_offensive_structure": 3,
 			"start_delay_s": 45.0,
 			"build_speed": 0.75,
 			"expected_number_of_ag_turrets": 1,
@@ -83,6 +87,7 @@ class AiDifficulty:
 		},
 		HARD:
 		{
+			"secondary_offensive_structure": 3,
 			"start_delay_s": 0.0,
 			"build_speed": 1.0,
 			"expected_number_of_ag_turrets": 2,

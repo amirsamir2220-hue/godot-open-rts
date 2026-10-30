@@ -1,0 +1,11 @@
+Model Information:
+* title:	Ukrainian Javelin missile operator
+* source:	https://sketchfab.com/3d-models/ukrainian-javelin-missile-operator-88d025d3b1f24db48c8cfa25c621a8c1
+* author:	42manako (https://sketchfab.com/42manako)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Ukrainian Javelin missile operator" (https://sketchfab.com/3d-models/ukrainian-javelin-missile-operator-88d025d3b1f24db48c8cfa25c621a8c1) by 42manako (https://sketchfab.com/42manako) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

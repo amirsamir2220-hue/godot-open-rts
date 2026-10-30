@@ -1,0 +1,11 @@
+Model Information:
+* title:	Game ready Military Tent Unity
+* source:	https://sketchfab.com/3d-models/game-ready-military-tent-unity-7f11fd2d05a544d285dd157d9a7f8e77
+* author:	shokhrukhx (https://sketchfab.com/shokhrukhx)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Game ready Military Tent Unity" (https://sketchfab.com/3d-models/game-ready-military-tent-unity-7f11fd2d05a544d285dd157d9a7f8e77) by shokhrukhx (https://sketchfab.com/shokhrukhx) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

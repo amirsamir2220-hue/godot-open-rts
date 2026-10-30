@@ -12,6 +12,11 @@ layout_mode = 2
 focus_mode = 0
 text = "T"
 
+[node name="ProduceHumveeButton" type="Button" parent="."]
+layout_mode = 2
+focus_mode = 0
+text = "HV"
+
 [node name="Padding1" type="Control" parent="."]
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
@@ -62,9 +67,5 @@ custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Padding11" type="Control" parent="."]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-mouse_filter = 2
-
 [connection signal="pressed" from="ProduceTankButton" to="." method="_on_produce_tank_button_pressed"]
+[connection signal="pressed" from="ProduceHumveeButton" to="." method="_on_produce_humvee_button_pressed"]

@@ -4,6 +4,8 @@ const FactionUi = preload("res://source/match/hud/FactionUi.gd")
 const CommandCenterUnit = preload("res://source/match/units/CommandCenter.tscn")
 const VehicleFactoryUnit = preload("res://source/match/units/VehicleFactory.tscn")
 const AircraftFactoryUnit = preload("res://source/match/units/AircraftFactory.tscn")
+const BarracksUnit = preload("res://source/match/units/Barracks.tscn")
+const AirfieldUnit = preload("res://source/match/units/Airfield.tscn")
 const AntiGroundTurretUnit = preload("res://source/match/units/AntiGroundTurret.tscn")
 const AntiAirTurretUnit = preload("res://source/match/units/AntiAirTurret.tscn")
 
@@ -12,6 +14,8 @@ var unit = null:
 		unit = value
 		_refresh()
 
+@onready var _barracks_button = find_child("PlaceBarracksButton")
+@onready var _airfield_button = find_child("PlaceAirfieldButton")
 @onready var _ag_turret_button = find_child("PlaceAntiGroundTurretButton")
 @onready var _aa_turret_button = find_child("PlaceAntiAirTurretButton")
 @onready var _cc_button = find_child("PlaceCommandCenterButton")
@@ -30,6 +34,8 @@ func _refresh():
 	var costs = Constants.Match.Units.CONSTRUCTION_COSTS
 	FactionUi.setup_button(_ag_turret_button, AntiGroundTurretUnit, faction, costs)
 	FactionUi.setup_button(_aa_turret_button, AntiAirTurretUnit, faction, costs)
+	FactionUi.setup_button(_barracks_button, BarracksUnit, faction, costs)
+	FactionUi.setup_button(_airfield_button, AirfieldUnit, faction, costs)
 	FactionUi.setup_button(_cc_button, CommandCenterUnit, faction, costs)
 	FactionUi.setup_button(_vehicle_factory_button, VehicleFactoryUnit, faction, costs)
 	FactionUi.setup_button(_aircraft_factory_button, AircraftFactoryUnit, faction, costs)
@@ -53,3 +59,11 @@ func _on_place_anti_ground_turret_button_pressed():
 
 func _on_place_anti_air_turret_button_pressed():
 	MatchSignals.place_structure.emit(AntiAirTurretUnit)
+
+
+func _on_place_barracks_button_pressed():
+	MatchSignals.place_structure.emit(BarracksUnit)
+
+
+func _on_place_airfield_button_pressed():
+	MatchSignals.place_structure.emit(AirfieldUnit)

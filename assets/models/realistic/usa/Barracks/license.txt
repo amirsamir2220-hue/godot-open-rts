@@ -1,0 +1,11 @@
+Model Information:
+* title:	Small Barracks
+* source:	https://sketchfab.com/3d-models/small-barracks-6bf1d1cb834d433bb3cd169695d87bc2
+* author:	creationwasteland (https://sketchfab.com/creationwasteland)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Small Barracks" (https://sketchfab.com/3d-models/small-barracks-6bf1d1cb834d433bb3cd169695d87bc2) by creationwasteland (https://sketchfab.com/creationwasteland) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

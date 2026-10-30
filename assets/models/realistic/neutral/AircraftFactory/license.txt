@@ -1,0 +1,11 @@
+Model Information:
+* title:	Heliport Helipad air base helicopter
+* source:	https://sketchfab.com/3d-models/heliport-helipad-air-base-helicopter-46fe680de5404a49b2bfeb0ffbbe0fb2
+* author:	ahmagh2e (https://sketchfab.com/ahmagh2e)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Heliport Helipad air base helicopter" (https://sketchfab.com/3d-models/heliport-helipad-air-base-helicopter-46fe680de5404a49b2bfeb0ffbbe0fb2) by ahmagh2e (https://sketchfab.com/ahmagh2e) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

@@ -6,6 +6,7 @@ extends Node3D
 const WRECK_LIFETIME_S = 10.0
 const WRECK_SINK_TIME_S = 2.0
 const FALL_TIME_S = 0.9
+const INFANTRY_TYPES = ["Rifleman", "AntiTankSoldier"]
 
 static var _burnt_material = null
 static var _sphere_mesh = null
@@ -31,6 +32,9 @@ static func spawn(unit):
 	var radius = unit.radius if unit.radius != null else 1.0
 	var is_air = unit.movement_domain == Constants.Match.Navigation.Domain.AIR
 	var is_structure = unit.find_child("Movement") == null
+	if unit.type in INFANTRY_TYPES:
+		effect._fall_over(model)
+		return
 	effect._play(model, radius, is_air, is_structure)
 
 
@@ -59,6 +63,27 @@ func _play(model, radius, is_air, is_structure):
 	if wreck != null:
 		cleanup.tween_property(wreck, "position:y", wreck.position.y - 0.8, WRECK_SINK_TIME_S)
 	cleanup.tween_callback(queue_free)
+
+
+## Soldiers fall over (no fireball) and stay on the ground for a while.
+func _fall_over(model):
+	if model == null or not is_instance_valid(model):
+		queue_free()
+		return
+	var body = model.duplicate()
+	add_child(body)
+	body.global_transform = model.global_transform
+	for node in [body] + body.find_children("*", "", true, false):
+		node.set_process(false)
+		if node.name == "MuzzleFlash":
+			node.visible = false
+	var tween = create_tween()
+	tween.tween_property(body, "rotation:x", body.rotation.x + PI * 0.48, 0.35).set_ease(
+		Tween.EASE_IN
+	)
+	tween.tween_interval(WRECK_LIFETIME_S * 0.5)
+	tween.tween_property(body, "position:y", body.position.y - 0.3, WRECK_SINK_TIME_S)
+	tween.tween_callback(queue_free)
 
 
 func _create_wreck(model):

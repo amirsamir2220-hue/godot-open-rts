@@ -1,0 +1,72 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://source/match/hud/unit-menus/AirfieldMenu.gd" id="1_script"]
+
+[node name="AirfieldMenu" type="GridContainer"]
+mouse_filter = 2
+columns = 4
+script = ExtResource("1_script")
+
+[node name="ProduceFighterButton" type="Button" parent="."]
+layout_mode = 2
+focus_mode = 0
+text = "F"
+
+[node name="ProduceStrikeFighterButton" type="Button" parent="."]
+layout_mode = 2
+focus_mode = 0
+text = "SF"
+
+[node name="ProduceStealthFighterButton" type="Button" parent="."]
+layout_mode = 2
+focus_mode = 0
+text = "ST"
+
+[node name="Padding1" type="Control" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Padding2" type="Control" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Padding3" type="Control" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Padding4" type="Control" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Padding5" type="Control" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Padding6" type="Control" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Padding7" type="Control" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Padding8" type="Control" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Padding9" type="Control" parent="."]
+custom_minimum_size = Vector2(48, 48)
+layout_mode = 2
+mouse_filter = 2
+
+[connection signal="pressed" from="ProduceFighterButton" to="." method="_on_produce_fighter_button_pressed"]
+[connection signal="pressed" from="ProduceStrikeFighterButton" to="." method="_on_produce_strike_fighter_button_pressed"]
+[connection signal="pressed" from="ProduceStealthFighterButton" to="." method="_on_produce_stealth_fighter_button_pressed"]

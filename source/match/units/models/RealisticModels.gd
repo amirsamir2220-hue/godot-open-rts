@@ -28,12 +28,62 @@ const CREDITS = [
 	'"96K6 Pantsir-S2" by 42manako (CC BY 4.0, Sketchfab)',
 	'"9M133 Kornet / AT-14 Spriggan" by XEPCOH_552 (CC BY 4.0, Sketchfab)',
 	'"Orlan-10" by flightclubua (CC BY 4.0, Sketchfab)',
+	'"M998 Humvee HMG (WARNO)" by KojfDiscord (CC BY 4.0, Sketchfab)',
+	'"GAZ-2975 Tigr" by maxwikdahl (CC BY 4.0, Sketchfab)',
+	'"Lockheed Martin F-16e/f Fighting Falcon" by andertan (CC BY 4.0, Sketchfab)',
+	'"F-15 Model" by AConnorB (CC BY 4.0, Sketchfab)',
+	'"Lockheed Martin F-35B Lightning II" by AF267 (CC BY 4.0, Sketchfab)',
+	'"MiG-29 Fulcrum Fighter Jet" by Carlos.Maciel (CC BY 4.0, Sketchfab)',
+	'"Sukhoi Su-35 Flanker-E" by andertan (CC BY 4.0, Sketchfab)',
+	'"Sukhoi PAK FA T-50" by 42manako (CC BY 4.0, Sketchfab)',
+	'"US Marine" by doctortex (CC BY 4.0, Sketchfab)',
+	'"Russian Soldier" by doctortex (CC BY 4.0, Sketchfab)',
+	'"Ukrainian Javelin missile operator" by 42manako (CC BY 4.0, Sketchfab)',
+	'"Military HQ Building with 3 Interiors" by AVALMesh (CC BY 4.0, Sketchfab)',
+	'"Military Style Building (with animations)" by TampaJoey (CC BY 4.0, Sketchfab)',
+	'"Runway and Hangar" by Derek.Dziedzic (CC BY 4.0, Sketchfab)',
+	'"Heliport Helipad air base helicopter" by Mehdi Shahsavan (CC BY 4.0, Sketchfab)',
+	'"Small Barracks" by creationwasteland (CC BY 4.0, Sketchfab)',
+	'"Game ready Military Tent Unity" by shokhrukhx (CC BY 4.0, Sketchfab)',
 ]
 
 # forward: model-space axis pointing to the vehicle's front
-# mount: "ground" (bottom on y=0), "air" (centered at y=AIR_CENTER), "base" (on a code-built base)
+# length: longest horizontal side in game units (or height: total height, for soldiers)
+# mount: "ground" (bottom on y=0), "air" (centered at y=AIR_CENTER), "base" (on a code-built base),
+#        "structure" (ground, bigger team flag)
+# file: another model folder to use (shared buildings, the same soldier with another weapon)
+# weapon: "rifle" / "rpg" - code-built weapon for soldiers posed with empty hands
 const AIR_CENTER = 0.25
+const NEUTRAL_STRUCTURES = {
+	"CommandCenter": {"forward": Vector3(0, 0, 1), "length": 3.8, "mount": "structure"},
+	"VehicleFactory": {"forward": Vector3(0, 0, 1), "length": 3.2, "mount": "structure"},
+	"AircraftFactory": {"forward": Vector3(1, 0, 0), "length": 3.1, "mount": "structure"},
+	"Airfield": {"forward": Vector3(0, 0, -1), "length": 4.6, "mount": "structure"},
+}
 const CONFIG = {
+	"usa/Humvee": {"forward": Vector3(0, 0, 1), "length": 1.15, "mount": "ground"},
+	"russia/Humvee": {"forward": Vector3(0, 0, 1), "length": 1.25, "mount": "ground"},
+	"usa/Fighter": {"forward": Vector3(1, 0, 0), "length": 2.0, "mount": "air"},
+	"usa/StrikeFighter": {"forward": Vector3(1, 0, 0), "length": 2.2, "mount": "air"},
+	"usa/StealthFighter": {"forward": Vector3(1, 0, 0), "length": 2.1, "mount": "air"},
+	"russia/Fighter": {"forward": Vector3(-1, 0, 0), "length": 2.0, "mount": "air"},
+	"russia/StrikeFighter": {"forward": Vector3(1, 0, 0), "length": 2.3, "mount": "air"},
+	"russia/StealthFighter": {"forward": Vector3(0, 0, -1), "length": 2.3, "mount": "air"},
+	"usa/Rifleman":
+	{"forward": Vector3(0, 0, 1), "height": 0.42, "mount": "ground", "weapon": "rifle"},
+	"russia/Rifleman":
+	{"forward": Vector3(0, 0, 1), "height": 0.42, "mount": "ground", "weapon": "rifle"},
+	"usa/AntiTankSoldier": {"forward": Vector3(0, 0, 1), "height": 0.36, "mount": "ground"},
+	"russia/AntiTankSoldier":
+	{
+		"forward": Vector3(0, 0, 1),
+		"height": 0.42,
+		"mount": "ground",
+		"weapon": "rpg",
+		"file": "russia/Rifleman",
+	},
+	"usa/Barracks": {"forward": Vector3(0, 0, -1), "length": 2.7, "mount": "structure"},
+	"russia/Barracks": {"forward": Vector3(0, 0, 1), "length": 2.6, "mount": "structure"},
 	"usa/Tank": {"forward": Vector3(0, 0, 1), "length": 2.1, "mount": "ground"},
 	"usa/Worker": {"forward": Vector3(0, 0, 1), "length": 1.5, "mount": "ground"},
 	"usa/Helicopter": {"forward": Vector3(1, 0, 0), "length": 2.3, "mount": "air"},
@@ -56,11 +106,22 @@ const CONFIG = {
 
 
 static func has(key):
-	return CONFIG.has(key) and ResourceLoader.exists(_path(key))
+	return not _config(key).is_empty() and ResourceLoader.exists(_path(key))
+
+
+static func _config(key):
+	if CONFIG.has(key):
+		return CONFIG[key]
+	var type = key.get_slice("/", 1)
+	if NEUTRAL_STRUCTURES.has(type):
+		var cfg = NEUTRAL_STRUCTURES[type].duplicate()
+		cfg["file"] = "neutral/" + type
+		return cfg
+	return {}
 
 
 static func build(key):
-	var cfg = CONFIG[key]
+	var cfg = _config(key)
 	var root = Node3D.new()
 	var holder = Node3D.new()
 	holder.name = "Realistic"
@@ -75,7 +136,11 @@ static func build(key):
 	var yaw = atan2(cfg["forward"].x, cfg["forward"].z) + PI  # rotate `forward` onto -Z
 	holder.transform = Transform3D(Basis(Vector3.UP, -yaw), Vector3.ZERO)
 	var aabb = _meshes_aabb(scene, root)
-	var scale = cfg["length"] / max(aabb.size.x, aabb.size.z)
+	var scale = (
+		cfg["height"] / aabb.size.y
+		if cfg.has("height")
+		else cfg["length"] / max(aabb.size.x, aabb.size.z)
+	)
 	holder.transform = Transform3D(
 		Basis(Vector3.UP, -yaw).scaled(Vector3.ONE * scale), Vector3.ZERO
 	)
@@ -112,8 +177,12 @@ static func build(key):
 				"ProjectileOrigin", Vector3(0, full.position.y + full.size.y * 0.3, origin.z * 0.5)
 			)
 		)
-	if cfg["mount"] != "air":
-		_add_team_pennant(root)
+	if cfg.has("weapon"):
+		_add_infantry_weapon(root, cfg["weapon"])
+	if cfg.has("height"):
+		_add_team_patch(root)
+	elif cfg["mount"] != "air":
+		_add_team_pennant(root, cfg["mount"] == "structure")
 	if cfg["mount"] == "base":
 		root = _on_code_built_base(key, root)
 	return root
@@ -121,11 +190,14 @@ static func build(key):
 
 ## A small flag in the player's color on a short pole at the rear-left of a vehicle, so units of
 ## players sharing a faction stay distinguishable (the realistic textures have no team color).
-static func _add_team_pennant(root):
+static func _add_team_pennant(root, is_structure = false):
 	var aabb = _meshes_aabb(root, root)
 	var height = aabb.size.y
 	var pole_top = aabb.end.y + height * 0.25
 	var pole_bottom = aabb.position.y + height * 0.55
+	if is_structure:
+		pole_top = aabb.end.y + 0.35
+		pole_bottom = aabb.position.y
 	var position = Vector3(
 		aabb.position.x + aabb.size.x * 0.22,
 		(pole_top + pole_bottom) * 0.5,
@@ -133,13 +205,64 @@ static func _add_team_pennant(root):
 	)
 	var b = K.builder()
 	b.cylinder(K.xf(position), 0.008, 0.008, pole_top - pole_bottom, K.Palette.DARK, 4)
-	var flag_size = clamp(aabb.size.z * 0.09, 0.06, 0.14)
+	var flag_size = 0.28 if is_structure else clamp(aabb.size.z * 0.09, 0.06, 0.14)
+	if is_structure:
+		b.cylinder(K.xf(position), 0.018, 0.018, pole_top - pole_bottom, K.Palette.METAL, 6)
 	b.box(
 		K.xf(Vector3(position.x, pole_top - flag_size * 0.3, position.z + flag_size * 0.5)),
 		Vector3(0.01, flag_size * 0.6, flag_size),
 		K.TEAM
 	)
 	root.add_child(K.mesh_node("TeamPennant", b))
+
+
+## A rifle (or an RPG on the shoulder) for soldiers whose pose was baked with empty hands
+## (Phase 3E, see pose.py in CLAUDE.md); the firing point moves to its muzzle.
+static func _add_infantry_weapon(root, weapon):
+	var aabb = _meshes_aabb(root, root)
+	var h = aabb.size.y
+	var b = K.builder()
+	var muzzle = Vector3.ZERO
+	if weapon == "rpg":
+		var tube = K.xf(Vector3(h * 0.1, h * 0.8, -h * 0.05), Vector3(90, 0, 0))
+		b.cylinder(tube, h * 0.035, h * 0.035, h * 0.62, K.Palette.RU_GREEN, 8)
+		b.cylinder(
+			K.xf(Vector3(h * 0.1, h * 0.8, -h * 0.4), Vector3(90, 0, 0)),
+			h * 0.03,
+			h * 0.06,
+			h * 0.12,
+			K.Palette.RU_GREEN_DARK,
+			8
+		)
+		muzzle = Vector3(h * 0.1, h * 0.8, -h * 0.46)
+	else:
+		var rifle = K.xf(Vector3(h * 0.02, h * 0.64, -h * 0.24), Vector3(-8, 0, 0))
+		b.box(rifle, Vector3(h * 0.035, h * 0.06, h * 0.5), K.Palette.DARK)
+		b.box(
+			rifle * K.xf(Vector3(0, -h * 0.06, -h * 0.03)),
+			Vector3(h * 0.03, h * 0.08, h * 0.04),
+			K.Palette.DARK
+		)
+		muzzle = Vector3(h * 0.02, h * 0.6, -h * 0.5)
+	root.add_child(K.mesh_node("Weapon", b))
+	var old_origin = root.find_child("ProjectileOrigin", true, false)
+	if old_origin != null:
+		old_origin.get_parent().remove_child(old_origin)
+		old_origin.free()
+	root.add_child(K.marker("ProjectileOrigin", muzzle))
+
+
+## Soldiers carry a small patch in the player's color on the back instead of a pennant.
+static func _add_team_patch(root):
+	var aabb = _meshes_aabb(root, root)
+	var h = aabb.size.y
+	var b = K.builder()
+	b.box(
+		K.xf(Vector3(aabb.get_center().x, h * 0.74, aabb.end.z - h * 0.01)),
+		Vector3(h * 0.2, h * 0.14, h * 0.03),
+		K.TEAM
+	)
+	root.add_child(K.mesh_node("TeamPatch", b))
 
 
 ## Adds two counter-rotating blade sets at the top of the model (Ka-52 style).
@@ -181,7 +304,8 @@ static func _blades(blade_count, radius):
 
 
 static func _path(key):
-	return ROOT + key + "/scene.gltf"
+	var cfg = _config(key)
+	return ROOT + (cfg["file"] if cfg.has("file") else key) + "/scene.gltf"
 
 
 ## Puts the realistic weapon on the code-built emplacement (sandbags/barriers and tripod).
