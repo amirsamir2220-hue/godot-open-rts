@@ -70,7 +70,7 @@ Low-poly models per faction for all 9 unit types:
 
 ## Status
 
-- [ ] Phase 1 - Performance
+- [x] Phase 1 - Performance
 - [ ] Phase 2 - Factions
 - [ ] Phase 3 - Models
 - [ ] Phase 4 - UI

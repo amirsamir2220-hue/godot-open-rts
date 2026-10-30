@@ -130,10 +130,8 @@ bounding_planes = Array[Plane]([Plane(1, 0, 0, 0), Plane(-1, 0, 0, -50), Plane(0
 transform = Transform3D(0.512043, 0.673162, -0.533541, 0, 0.621148, 0.783694, 0.85896, -0.401285, 0.318054, 0, 38.7614, 0)
 shadow_enabled = true
 shadow_blur = 0.05
+directional_shadow_mode = 1
 directional_shadow_split_1 = 0.45
-directional_shadow_split_2 = 0.5
-directional_shadow_split_3 = 0.55
-directional_shadow_blend_splits = true
 directional_shadow_pancake_size = 100.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
