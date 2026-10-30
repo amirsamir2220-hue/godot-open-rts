@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode unshaded;
+render_mode unshaded, depth_test_disabled; // full-screen overlay quad
 
 uniform vec4 color : source_color = vec4(1.0);
 uniform float max_density_height = 0.0;
@@ -7,6 +7,8 @@ uniform float min_density_height = 1.0;
 uniform float max_height = 9999.0;
 uniform float min_height = -9999.0;
 uniform sampler2D depth_texture : hint_depth_texture;
+// set by Globals.gd from the active renderer (Compatibility = OpenGL depth range)
+global uniform bool depth_is_opengl;
 
 void vertex()
 {
@@ -19,9 +21,10 @@ void fragment()
 
   // depth is encoded on the first channel and is <0; 1>
   float depth = textureLod(depth_texture, SCREEN_UV, 0.0).x;
-  // transform depth from <0; 1> value to corresponding point in projection space <-1,-1,0; 1,1,1>*
-  // * note that projection space in Vulkan is different than in OpenGL
-  vec3 normalized_device_coordinates = vec3(SCREEN_UV * 2.0 - 1.0, depth);
+  // transform depth from <0; 1> value to the corresponding point in projection space:
+  // OpenGL (Compatibility) uses <-1; 1> for depth, Vulkan (Forward+/Mobile) uses <0; 1>
+  vec3 normalized_device_coordinates =
+      depth_is_opengl ? vec3(SCREEN_UV, depth) * 2.0 - 1.0 : vec3(SCREEN_UV * 2.0 - 1.0, depth);
   // move depth point from projection space to world space
   // * note that INV_PROJECTION_MATRIX is broken atm. so, let's use inverse(PROJECTION_MATRIX)
   vec4 world_position =

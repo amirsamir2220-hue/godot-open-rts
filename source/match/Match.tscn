@@ -31,6 +31,10 @@
 [ext_resource type="PackedScene" uid="uid://b8p6lcwubx1tp" path="res://source/match/handlers/UnitVisibilityHandler.tscn" id="32_fci1c"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ysb0j"]
+sky_top_color = Color(0.4, 0.56, 0.74, 1)
+sky_horizon_color = Color(0.86, 0.78, 0.64, 1)
+ground_bottom_color = Color(0.55, 0.45, 0.32, 1)
+ground_horizon_color = Color(0.86, 0.78, 0.64, 1)
 sun_angle_max = 200.0
 
 [sub_resource type="Sky" id="Sky_kunr4"]
@@ -38,12 +42,13 @@ sky_material = SubResource("ProceduralSkyMaterial_ysb0j")
 
 [sub_resource type="Environment" id="Environment_qxcnu"]
 background_mode = 2
-background_energy_multiplier = 1.2
 sky = SubResource("Sky_kunr4")
-ambient_light_color = Color(1, 1, 1, 1)
-tonemap_mode = 3
-tonemap_exposure = 0.9
-fog_light_color = Color(0.960784, 0.745098, 0.654902, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.64, 0.68, 0.76, 1)
+ambient_light_energy = 0.5
+tonemap_mode = 2
+tonemap_exposure = 1.0
+fog_light_color = Color(0.88, 0.79, 0.62, 1)
 fog_density = 0.0016
 fog_height = 0.25
 fog_height_density = 1.2
@@ -51,9 +56,9 @@ fog_height_density = 1.2
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qw0ps"]
 render_priority = 0
 shader = ExtResource("10_weh6c")
-shader_parameter/color = Color(0.85, 0.6596, 0.578, 1)
-shader_parameter/max_density_height = -0.5
-shader_parameter/min_density_height = 0.4
+shader_parameter/color = Color(0.82, 0.77, 0.68, 1)
+shader_parameter/max_density_height = -1.5
+shader_parameter/min_density_height = 0.6
 shader_parameter/max_height = 9999.0
 shader_parameter/min_height = -0.05
 
@@ -128,7 +133,10 @@ bounding_planes = Array[Plane]([Plane(1, 0, 0, 0), Plane(-1, 0, 0, -50), Plane(0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.512043, 0.673162, -0.533541, 0, 0.621148, 0.783694, 0.85896, -0.401285, 0.318054, 0, 38.7614, 0)
+light_color = Color(1, 0.9, 0.74, 1)
+light_energy = 0.95
 shadow_enabled = true
+shadow_opacity = 0.8
 shadow_blur = 0.05
 directional_shadow_mode = 1
 directional_shadow_split_1 = 0.45

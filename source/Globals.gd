@@ -11,6 +11,15 @@ var god_mode = false
 var cache = {}
 
 
+func _ready():
+	# depth-reconstructing shaders (fog, fog of war) need to know the depth range:
+	# OpenGL (Compatibility) uses <-1; 1>, Vulkan (Forward+/Mobile) uses <0; 1> with reversed Z.
+	# Only the Compatibility renderer runs without a RenderingDevice.
+	RenderingServer.global_shader_parameter_set(
+		"depth_is_opengl", RenderingServer.get_rendering_device() == null
+	)
+
+
 func _unhandled_input(event):
 	if event.is_action_pressed("toggle_god_mode"):
 		_toggle_god_mode()

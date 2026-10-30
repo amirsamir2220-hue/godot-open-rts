@@ -24,6 +24,16 @@ Also run the other scenes in `tests/manual/`. Messages about leaked RIDs/buffers
 *at exit* come from `--quit-after` and are expected; anything else (`SCRIPT ERROR`, `ERROR`
 during the run) must be fixed.
 
+## Renderer gotchas (Godot 4.3)
+
+- Godot 4.3's shader preprocessor has **no `CURRENT_RENDERER`** define. Shaders that rebuild
+  world positions from depth read the global shader uniform `depth_is_opengl` (declared in
+  `project.godot`, set in `Globals.gd`): OpenGL/Compatibility depth is `<-1; 1>`, Vulkan is
+  `<0; 1>` with reversed Z.
+- Full-screen overlay quads (`fog`, `*_fog_of_war`) must use `depth_test_disabled`; at z=0 they
+  sit mid-depth in OpenGL and were being hidden by the scene (half the screen had no fog of war).
+- Use `RenderingServer.get_rendering_device() == null` to detect Compatibility at runtime.
+
 ## Code map (Desert Command additions)
 
 - `source/match/units/models/` - code-built faction models: `ModelBuilder` (merged low-poly
@@ -37,6 +47,9 @@ during the run) must be fixed.
   `assets/ui/icons/<usa|russia|neutral>/<Type>.png`.
 - `source/match/hud/FactionUi.gd` - faction unit names (`USA_TANK`, `RUSSIA_TANK`, ... in
   `assets/translations/match.csv`), tooltips and icons for HUD buttons.
+- Desert look: `source/shaders/3d/sand_terrain.gdshader` via
+  `match/resources/materials/terrain.material.tres` (used by every map), lighting/sky/haze in
+  `source/match/Match.tscn` (warm sun, cool ambient fill, filmic tonemap, sandy height haze).
 - Resources: `resource_a` = **Supplies** (crates), `resource_b` = **Fuel** (drums); internal
   names are unchanged, only display names/models/colors.
 - `tests/manual/TestFactions.tscn` - both factions side by side, all 9 unit types.
@@ -160,7 +173,7 @@ Design rules:
 - [x] Phase 3 - Models
 - [x] Phase 3B - Motion
 - [x] Phase 4 - UI
-- [ ] Phase 5 - Desert look
+- [x] Phase 5 - Desert look
 - [ ] Phase 6 - Graphics settings menu
 - [ ] Phase 7 - VFX
 - [ ] Phase 8 - Model detail

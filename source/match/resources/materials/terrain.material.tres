@@ -1,6 +1,39 @@
-[gd_resource type="StandardMaterial3D" format=3 uid="uid://co8vfcoqqs5i8"]
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://co8vfcoqqs5i8"]
+
+[ext_resource type="Shader" path="res://source/shaders/3d/sand_terrain.gdshader" id="1_sand"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_large"]
+seed = 7
+frequency = 0.012
+fractal_octaves = 4
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_large"]
+width = 256
+height = 256
+seamless = true
+noise = SubResource("FastNoiseLite_large")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_small"]
+seed = 3
+frequency = 0.08
+fractal_octaves = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_small"]
+width = 128
+height = 128
+seamless = true
+noise = SubResource("FastNoiseLite_small")
 
 [resource]
-vertex_color_use_as_albedo = true
-albedo_color = Color(0.960784, 0.745098, 0.654902, 1)
-metallic = 1.0
+render_priority = 0
+shader = ExtResource("1_sand")
+shader_parameter/sand_light = Color(0.74, 0.66, 0.54, 1)
+shader_parameter/sand_dark = Color(0.6, 0.52, 0.41, 1)
+shader_parameter/sand_pale = Color(0.8, 0.76, 0.67, 1)
+shader_parameter/large_scale = 0.025
+shader_parameter/small_scale = 0.45
+shader_parameter/wind_direction = Vector2(0.8, 0.6)
+shader_parameter/ripple_frequency = 5.0
+shader_parameter/ripple_strength = 0.05
+shader_parameter/large_noise = SubResource("NoiseTexture2D_large")
+shader_parameter/small_noise = SubResource("NoiseTexture2D_small")

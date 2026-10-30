@@ -27,7 +27,7 @@ class Palette:
 	const US_TAN_DARK = Color("a38d62")
 	const US_OLIVE = Color("4c5137")
 	const US_GRAY = Color("a2a7a9")
-	const US_BUILDING = Color("cdbb95")
+	const US_BUILDING = Color("bba985")
 	const US_JAVELIN = Color("5c6542")
 	# Russia
 	const RU_GREEN = Color("5a6340")
