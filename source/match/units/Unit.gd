@@ -6,6 +6,8 @@ signal hp_changed
 signal action_changed(new_action)
 signal action_updated
 
+const FactionModels = preload("res://source/match/units/models/FactionModels.gd")
+
 const MATERIAL_ALBEDO_TO_REPLACE = Color(0.99, 0.81, 0.48)
 const MATERIAL_ALBEDO_TO_REPLACE_EPSILON = 0.05
 
@@ -46,6 +48,7 @@ var _action_locked = false
 func _ready():
 	if not _match.is_node_ready():
 		await _match.ready
+	_apply_faction_model()
 	_setup_color()
 	_setup_default_properties_from_constants()
 	assert(_safety_checks())
@@ -101,6 +104,31 @@ func _setup_color():
 		MATERIAL_ALBEDO_TO_REPLACE_EPSILON,
 		material
 	)
+	# faction models keep team-color parts on a dedicated surface (see ModelBuilder)
+	FactionModels.apply_team_color(find_child("Geometry"), player.get_team_color_material())
+
+
+## Replaces whatever is under the "Geometry" node with the model of the owner's faction.
+func _apply_faction_model():
+	var geometry = find_child("Geometry")
+	if geometry == null:
+		return
+	var faction = player.get("faction")
+	var model = FactionModels.build(type, faction if faction != null else Constants.Faction.DEFAULT)
+	if model == null:
+		return
+	for child in geometry.get_children():
+		geometry.remove_child(child)
+		child.free()  # immediately, so find_child() never returns the old Rotor/ProjectileOrigin
+	geometry.transform.basis = Basis()
+	geometry.add_child(model)
+	# find_child() skips unowned nodes together with their subtrees
+	model.owner = geometry.owner if geometry.owner != null else self
+	_on_faction_model_applied(model)
+
+
+func _on_faction_model_applied(_model):
+	pass
 
 
 func _set_action(action_node):

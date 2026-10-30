@@ -53,6 +53,12 @@ func is_under_construction():
 	return not is_constructed()
 
 
+func _on_faction_model_applied(model):
+	super(model)
+	if is_under_construction():
+		_change_geometry_material(UNDER_CONSTRUCTION_MATERIAL)
+
+
 func _finish_construction():
 	_change_geometry_material(null)
 	if is_inside_tree():

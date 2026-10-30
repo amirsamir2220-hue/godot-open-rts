@@ -15,6 +15,8 @@ const MATERIALS_ROOT = "res://source/match/resources/materials/"
 const BLUEPRINT_VALID_PATH = MATERIALS_ROOT + "blueprint_valid.material.tres"
 const BLUEPRINT_INVALID_PATH = MATERIALS_ROOT + "blueprint_invalid.material.tres"
 
+const FactionModels = preload("res://source/match/units/models/FactionModels.gd")
+
 var _active_blueprint_node = null
 var _pending_structure_radius = null
 var _pending_structure_navmap_rid = null
@@ -144,10 +146,7 @@ func _start_structure_placement(structure_prototype):
 	if _structure_placement_started():
 		return
 	_pending_structure_prototype = structure_prototype
-	_active_blueprint_node = (
-		load(Constants.Match.Units.STRUCTURE_BLUEPRINTS[structure_prototype.resource_path])
-		. instantiate()
-	)
+	_active_blueprint_node = _create_blueprint(structure_prototype)
 	var blueprint_origin = Vector3(-999, 0, -999)
 	var camera_direction_yless = (
 		(get_viewport().get_camera_3d().project_ray_normal(Vector2(0, 0)) * Vector3(1, 0, 1))
@@ -166,6 +165,17 @@ func _start_structure_placement(structure_prototype):
 		. get_navigation_map_rid_by_domain(temporary_structure_instance.movement_domain)
 	)
 	temporary_structure_instance.free()
+
+
+func _create_blueprint(structure_prototype):
+	var structure_type = structure_prototype.resource_path.get_file().get_basename()
+	var model = FactionModels.build(structure_type, _player.faction)
+	if model != null:
+		return model
+	return (
+		load(Constants.Match.Units.STRUCTURE_BLUEPRINTS[structure_prototype.resource_path])
+		. instantiate()
+	)
 
 
 func _set_blueprint_position_based_on_mouse_pos():

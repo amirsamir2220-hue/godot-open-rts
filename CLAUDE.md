@@ -24,6 +24,14 @@ Also run the other scenes in `tests/manual/`. Messages about leaked RIDs/buffers
 *at exit* come from `--quit-after` and are expected; anything else (`SCRIPT ERROR`, `ERROR`
 during the run) must be fixed.
 
+## Code map (Desert Command additions)
+
+- `source/match/units/models/` - code-built faction models: `ModelBuilder` (merged low-poly
+  meshes), `ModelKit` (palette, materials, helpers), `UsaModels` / `RussiaModels`,
+  `FactionModels` (registry, cache, team color, turret re-pointing, `MODEL_OVERRIDES`).
+- `source/utils/IconRenderBooth.tscn` - renders models to icons/previews (needs a GPU).
+- `tests/manual/TestFactions.tscn` - both factions side by side, all 9 unit types.
+
 ## Plan
 
 ### Phase 1 - Performance
@@ -140,7 +148,7 @@ Design rules:
 
 - [x] Phase 1 - Performance
 - [x] Phase 2 - Factions
-- [ ] Phase 3 - Models
+- [x] Phase 3 - Models
 - [ ] Phase 3B - Motion
 - [ ] Phase 4 - UI
 - [ ] Phase 5 - Desert look

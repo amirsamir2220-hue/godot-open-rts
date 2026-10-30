@@ -12,6 +12,11 @@ func _ready():
 	action = WaitingForTargets.new()
 
 
+func _on_faction_model_applied(model):
+	super(model)
+	FactionModels.retarget_turret(self, model)
+
+
 func _set_action(action_node):
 	if not _action_locked and action == null:
 		super(action_node)

@@ -14,6 +14,7 @@ signal changed
 @export var faction = Constants.Faction.DEFAULT
 
 var _color_material = null
+var _team_color_material = null
 
 
 func add_resources(resources):
@@ -42,6 +43,15 @@ func get_color_material():
 		_color_material.albedo_color = color
 		_color_material.metallic = 1
 	return _color_material
+
+
+## Material for team-color parts of faction models (matte, unlike get_color_material()).
+func get_team_color_material():
+	if _team_color_material == null:
+		_team_color_material = StandardMaterial3D.new()
+		_team_color_material.albedo_color = color
+		_team_color_material.roughness = 0.55
+	return _team_color_material
 
 
 func emit_changed():
