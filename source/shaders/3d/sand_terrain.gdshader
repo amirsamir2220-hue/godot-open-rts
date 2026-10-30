@@ -6,6 +6,7 @@ render_mode diffuse_lambert, specular_disabled;
 uniform vec4 sand_light : source_color = vec4(0.74, 0.66, 0.54, 1.0);
 uniform vec4 sand_dark : source_color = vec4(0.6, 0.52, 0.41, 1.0);
 uniform vec4 sand_pale : source_color = vec4(0.8, 0.76, 0.67, 1.0);
+uniform vec4 pebble_color : source_color = vec4(0.47, 0.39, 0.3, 1.0);
 uniform sampler2D large_noise : hint_default_white, filter_linear_mipmap, repeat_enable;
 uniform sampler2D small_noise : hint_default_white, filter_linear_mipmap, repeat_enable;
 uniform float large_scale = 0.025;
@@ -30,9 +31,15 @@ void fragment()
   float ripple =
       sin(dot(p, normalize(wind_direction)) * ripple_frequency + large * 14.0) * 0.5 + 0.5;
 
-  vec3 color = mix(sand_dark.rgb, sand_light.rgb, smoothstep(0.15, 0.85, large));
+  float fine = texture(small_noise, p * small_scale * 3.1 + vec2(0.13, 0.57)).r;
+  float pebbles = smoothstep(0.72, 0.8, texture(small_noise, p * small_scale * 1.9).r);
+
+  // gentle large-scale variation (no strong blotches), pale wind-swept patches
+  vec3 color = mix(sand_dark.rgb, sand_light.rgb, 0.3 + 0.55 * smoothstep(0.2, 0.8, large));
   color = mix(color, sand_pale.rgb, smoothstep(0.55, 0.85, medium) * 0.3);
-  color *= 0.92 + 0.16 * grain;
+  // grain at two scales and scattered darker pebbles
+  color *= 0.9 + 0.12 * grain + 0.08 * fine;
+  color = mix(color, pebble_color.rgb, pebbles * 0.45);
   color *= 1.0 - ripple_strength + ripple_strength * ripple;
   ALBEDO = color;
   ROUGHNESS = 1.0;

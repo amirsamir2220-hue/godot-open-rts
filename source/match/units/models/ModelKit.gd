@@ -65,6 +65,8 @@ static func team_placeholder():
 		_team_placeholder = StandardMaterial3D.new()
 		_team_placeholder.resource_name = TEAM_MATERIAL_NAME
 		_team_placeholder.albedo_color = Color("d8d4c8")
+		_team_placeholder.vertex_color_use_as_albedo = true
+		_team_placeholder.vertex_color_is_srgb = true
 		_team_placeholder.roughness = 0.6
 	return _team_placeholder
 

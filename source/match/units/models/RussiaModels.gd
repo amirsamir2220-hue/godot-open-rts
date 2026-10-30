@@ -269,7 +269,7 @@ static func command_center():
 		b.box(K.xf(Vector3(-0.5 - 0.3 + i * 0.2, 1.16, 0.095)), Vector3(0.12, 0.1, 0.01), P.GLASS)
 	b.box(K.xf(Vector3(0.1, 0.27, -0.83)), Vector3(0.5, 0.36, 0.2), P.DARK)  # entrance
 	b.box(K.xf(Vector3(0.1, 0.5, -0.86)), Vector3(0.7, 0.06, 0.26), P.CONCRETE)
-	b.box(K.xf(Vector3(0.7, 0.945, 0.3)), Vector3(0.9, 0.01, 1.0), TEAM)
+	b.box(K.xf(Vector3(0.7, 0.945, -0.4)), Vector3(0.9, 0.01, 0.14), TEAM)
 	b.tapered_box(
 		K.xf(Vector3(1.0, 0.94, 0.75)), Vector2(0.2, 0.2), Vector2(0.05, 0.05), 0.9, P.METAL
 	)

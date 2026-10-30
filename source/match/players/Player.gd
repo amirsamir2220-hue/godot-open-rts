@@ -50,6 +50,8 @@ func get_team_color_material():
 	if _team_color_material == null:
 		_team_color_material = StandardMaterial3D.new()
 		_team_color_material.albedo_color = color
+		_team_color_material.vertex_color_use_as_albedo = true  # baked shading (ModelBuilder)
+		_team_color_material.vertex_color_is_srgb = true
 		_team_color_material.roughness = 0.55
 	return _team_color_material
 

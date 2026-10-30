@@ -6,6 +6,7 @@
 extends RefCounted
 
 const TEAM = Color(1.0, 0.0, 1.0, 0.0)  # sentinel color: part is painted with player color
+const AO_STRENGTH = 0.38
 
 var _regular = []  # [position, normal, color] triples
 var _team = []
@@ -153,18 +154,39 @@ func wheel(pos, radius, width, tire_color, hub_color, sides = 8):
 
 func build(base_material, team_material):
 	var mesh = ArrayMesh.new()
+	var height_range = _height_range()
 	if not _regular.is_empty():
-		_commit(mesh, _regular, base_material)
+		_commit(mesh, _regular, base_material, height_range)
 	if not _team.is_empty():
-		_commit(mesh, _team, team_material)
+		_commit(mesh, _team, team_material, height_range)
 	return mesh
 
 
-func _commit(mesh, verts, material):
+func _height_range():
+	var y_min = INF
+	var y_max = -INF
+	for v in _regular + _team:
+		y_min = min(y_min, v[0].y)
+		y_max = max(y_max, v[0].y)
+	return Vector2(y_min, y_max)
+
+
+## Baked "ambient occlusion": darker towards the bottom of the part and on faces pointing down.
+## Free at runtime (vertex colors) and gives flat-colored models depth and contact with the ground.
+func _shade(color, position, normal, height_range):
+	var height = clamp(height_range.y - height_range.x, 0.3, 1.2)
+	var t = clamp((position.y - height_range.x) / height, 0.0, 1.0)
+	var factor = lerp(1.0 - AO_STRENGTH, 1.0, sqrt(t))
+	if normal.y < -0.5:
+		factor *= 0.7
+	return Color(color.r * factor, color.g * factor, color.b * factor, color.a)
+
+
+func _commit(mesh, verts, material, height_range):
 	var st = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 	for v in verts:
-		st.set_color(v[2])
+		st.set_color(_shade(v[2], v[0], v[1], height_range))
 		st.set_normal(v[1])
 		st.add_vertex(v[0])
 	st.commit(mesh)

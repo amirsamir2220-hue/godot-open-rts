@@ -229,7 +229,7 @@ static func command_center():
 		var z = -0.45 + i * 0.38
 		b.box(K.xf(Vector3(1.405, 0.62, z)), Vector3(0.02, 0.16, 0.22), P.GLASS)
 		b.box(K.xf(Vector3(-1.205, 0.62, z)), Vector3(0.02, 0.16, 0.22), P.GLASS)
-	b.box(K.xf(Vector3(0.1, 1.005, 0.3)), Vector3(1.3, 0.01, 0.9), TEAM)  # roof emblem
+	b.box(K.xf(Vector3(0.1, 1.005, -0.5)), Vector3(2.5, 0.01, 0.16), TEAM)  # roof stripe
 	b.box(K.xf(Vector3(0.9, 1.08, -0.2)), Vector3(0.3, 0.16, 0.24), P.METAL)  # AC units
 	b.box(K.xf(Vector3(0.9, 1.08, 0.2)), Vector3(0.3, 0.16, 0.24), P.METAL)
 	# comms mast
@@ -277,7 +277,7 @@ static func vehicle_factory():
 	)
 	b.box(K.xf(Vector3(1.05, 0.32, 0.5)), Vector3(0.7, 0.56, 1.1), P.US_BUILDING)  # workshop
 	b.box(K.xf(Vector3(1.05, 0.61, 0.5)), Vector3(0.76, 0.04, 1.16), P.CONCRETE)
-	b.box(K.xf(Vector3(1.05, 0.63, 0.5)), Vector3(0.4, 0.01, 0.6), TEAM)
+	b.box(K.xf(Vector3(1.05, 0.63, 0.5)), Vector3(0.7, 0.01, 0.12), TEAM)
 	b.cylinder(K.xf(Vector3(1.2, 0.95, 0.85)), 0.06, 0.06, 0.7, P.METAL, 6)  # stack
 	b.box(K.xf(Vector3(1.05, 0.3, -0.5)), Vector3(0.5, 0.5, 0.5), P.WOOD)  # parts crates
 	root.add_child(K.mesh_node("Body", b))

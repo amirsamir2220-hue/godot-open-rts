@@ -5,6 +5,8 @@ const Structure = preload("res://source/match/units/Structure.gd")
 const Player = preload("res://source/match/players/Player.gd")
 const Human = preload("res://source/match/players/human/Human.gd")
 
+const DesertScatter = preload("res://source/match/decorations/DesertScatter.gd")
+
 const CommandCenter = preload("res://source/match/units/CommandCenter.tscn")
 const Drone = preload("res://source/match/units/Drone.tscn")
 const Worker = preload("res://source/match/units/Worker.tscn")
@@ -83,6 +85,10 @@ func _setup_subsystems_dependent_on_map():
 	fog_of_war.resize(map.size)
 	_recalculate_camera_bounding_planes(map.size)
 	navigation.setup(map)
+	var desert_scatter = DesertScatter.new()
+	desert_scatter.name = "DesertScatter"
+	add_child(desert_scatter)
+	desert_scatter.setup(map)
 
 
 func _recalculate_camera_bounding_planes(map_size: Vector2):

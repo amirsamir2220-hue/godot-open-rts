@@ -64,6 +64,8 @@ func render(type, faction):
 	_stage.add_child(model)
 	var team_material = StandardMaterial3D.new()
 	team_material.albedo_color = team_color
+	team_material.vertex_color_use_as_albedo = true
+	team_material.vertex_color_is_srgb = true
 	team_material.roughness = 0.55
 	FactionModels.apply_team_color(model, team_material)
 	_frame(model)
