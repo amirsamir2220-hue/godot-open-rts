@@ -7,6 +7,8 @@ signal action_changed(new_action)
 signal action_updated
 
 const FactionModels = preload("res://source/match/units/models/FactionModels.gd")
+const ModelMotion = preload("res://source/match/units/traits/ModelMotion.gd")
+const DeathEffect = preload("res://source/match/units/effects/DeathEffect.gd")
 
 const MATERIAL_ALBEDO_TO_REPLACE = Color(0.99, 0.81, 0.48)
 const MATERIAL_ALBEDO_TO_REPLACE_EPSILON = 0.05
@@ -125,6 +127,17 @@ func _apply_faction_model():
 	# find_child() skips unowned nodes together with their subtrees
 	model.owner = geometry.owner if geometry.owner != null else self
 	_on_faction_model_applied(model)
+	_setup_model_motion(model)
+
+
+func _setup_model_motion(model):
+	var kind = ModelMotion.kind_for(self)
+	if kind == null:
+		return
+	var motion = ModelMotion.new()
+	motion.name = "ModelMotion"
+	add_child(motion)
+	motion.setup(self, model, kind)
 
 
 func _on_faction_model_applied(_model):
@@ -184,6 +197,7 @@ func _safety_checks():
 
 
 func _handle_unit_death():
+	DeathEffect.spawn(self)
 	tree_exited.connect(func(): MatchSignals.unit_died.emit(self))
 	queue_free()
 

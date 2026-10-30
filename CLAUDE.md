@@ -29,6 +29,9 @@ during the run) must be fixed.
 - `source/match/units/models/` - code-built faction models: `ModelBuilder` (merged low-poly
   meshes), `ModelKit` (palette, materials, helpers), `UsaModels` / `RussiaModels`,
   `FactionModels` (registry, cache, team color, turret re-pointing, `MODEL_OVERRIDES`).
+- `source/match/units/traits/ModelMotion.gd` - visual-only motion (hull slew, pitch/roll,
+  turret tracking, heli/drone banking, recoil, muzzle flash). Added by `Unit` at runtime.
+- `source/match/units/effects/DeathEffect.gd` - wreck + fireball + smoke on unit death.
 - `source/utils/IconRenderBooth.tscn` - renders models to icons/previews (needs a GPU).
 - `tests/manual/TestFactions.tscn` - both factions side by side, all 9 unit types.
 
@@ -149,7 +152,7 @@ Design rules:
 - [x] Phase 1 - Performance
 - [x] Phase 2 - Factions
 - [x] Phase 3 - Models
-- [ ] Phase 3B - Motion
+- [x] Phase 3B - Motion
 - [ ] Phase 4 - UI
 - [ ] Phase 5 - Desert look
 - [ ] Phase 6 - Graphics settings menu

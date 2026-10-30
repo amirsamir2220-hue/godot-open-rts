@@ -60,12 +60,22 @@ static func apply_team_color(node, material):
 				mesh_instance.set_surface_override_material(surface_id, material)
 
 
-## Points a turret unit's RotationSynchronizer and idle rotator at the model's "Turret" node.
+## Points a turret unit's RotationSynchronizer and idle rotator at the model's turret.
+## They drive a "TurretAim" node placed on the "Turret" pivot; ModelMotion then slews the
+## visible "Turret" towards it (Generals-like smooth turret traverse instead of snapping).
 ## Launcher elevation is part of the model, so the scene's extra upward tilt is reset.
 static func retarget_turret(unit, model):
 	var turret = model.find_child("Turret")
 	if turret == null:
 		return
+	var aim = model.find_child("TurretAim")
+	if aim == null:
+		aim = Node3D.new()
+		aim.name = "TurretAim"
+		turret.add_sibling(aim)
+		aim.transform = turret.transform
+		aim.owner = model
+	turret = aim
 	var upwards_rotation = unit.find_child("UpwardsRotation")
 	if upwards_rotation != null:
 		upwards_rotation.transform = Transform3D.IDENTITY
