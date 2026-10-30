@@ -1,6 +1,7 @@
 # Desert Command
 
 A C&C Generals-style RTS with modern real-world weapons, **USA vs Russia**.
+Visual and motion target: **C&C Generals Zero Hour** (unit look, motion feel, effects, lighting).
 Fork of [Open RTS](https://github.com/lampe-games/godot-open-rts) (Godot 4.3, MIT).
 
 ## Ground rules
@@ -58,6 +59,22 @@ Low-poly models per faction for all 9 unit types:
 - `Utils.Match.traverse_node_tree_and_replace_materials_matching_albedo` only handles
   `ArrayMesh` surface materials, so team-color parts need their own handling.
 - Use faction models for structure placement blueprints too.
+- **Art strategy (hybrid):** models are built in code now (original, faction-accurate
+  silhouettes, merged meshes, vertex colors + one team-color surface for cheap draw calls).
+  Each model sits behind one registry (`FactionModels.build(type, faction)`), so a better
+  model (CC0 pack or a sourced/bought `.glb`) can replace any entry later without code changes,
+  as long as it keeps the node names (`Rotor`, `ProjectileOrigin`, `Turret`).
+- Split moving parts now (tank `Turret`, rotors, propellers, radar) so Phase 3B can animate them.
+
+### Phase 3B - Motion (Generals-like feel)
+- Tanks: turret tracks targets independently of the hull; hull accelerates/brakes and turns
+  in place before driving; cannon recoil + muzzle flash.
+- Trucks: acceleration, slight body roll/pitch on turns and stops.
+- Helicopters: tilt forward when accelerating, bank in turns, hover bob, coaxial rotors on Ka-52.
+- Drones: banked turns, spinning propellers.
+- Turrets: smooth slewing to target instead of snapping; radar spin on Pantsir/Patriot.
+- Deaths: unit wreck + simple explosion (full VFX comes in Phase 7).
+- Pure visuals: movement speeds, ranges and timing of attacks stay unchanged.
 
 ### Phase 4 - UI
 - Faction unit names in production tooltips (`hud/unit-menus/*.gd`, via `tr()`).
@@ -124,6 +141,7 @@ Design rules:
 - [x] Phase 1 - Performance
 - [x] Phase 2 - Factions
 - [ ] Phase 3 - Models
+- [ ] Phase 3B - Motion
 - [ ] Phase 4 - UI
 - [ ] Phase 5 - Desert look
 - [ ] Phase 6 - Graphics settings menu
