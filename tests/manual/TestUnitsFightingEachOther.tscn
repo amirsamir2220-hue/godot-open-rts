@@ -72,6 +72,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.61424, -3.8147e-06, 9.47008
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.6465, -3.8147e-06, 11.3385)
 
 [node name="SimpleClairvoyantAI" parent="Players" index="1" instance=ExtResource("7_uj2s6")]
+faction = "russia"
 
 [node name="Helicopter" parent="Players/SimpleClairvoyantAI" index="5" instance=ExtResource("3_vdlcv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.0427, 0, 4.42295)

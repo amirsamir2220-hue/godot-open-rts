@@ -7,6 +7,20 @@ enum PlayerType {
 }
 
 
+class Faction:
+	const USA = "usa"
+	const RUSSIA = "russia"
+	const ALL = [USA, RUSSIA]
+	const DEFAULT = USA
+	const NAMES = {
+		USA: "FACTION_USA",
+		RUSSIA: "FACTION_RUSSIA",
+	}
+
+	static func opposite(faction):
+		return RUSSIA if faction == USA else USA
+
+
 class Match:
 	extends "res://source/match/MatchConstants.gd"
 

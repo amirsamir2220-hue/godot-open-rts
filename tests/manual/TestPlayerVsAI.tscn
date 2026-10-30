@@ -84,6 +84,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.2469, 0, 5.45996)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5856, 0, 14.6178)
 
 [node name="SimpleClairvoyantAI" parent="Players" index="1" instance=ExtResource("15_6w32d")]
+faction = "russia"
 primary_offensive_structure = 1
 secondary_offensive_structure = 0
 

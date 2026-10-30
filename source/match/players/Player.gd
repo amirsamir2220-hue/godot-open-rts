@@ -11,6 +11,7 @@ signal changed
 		resource_b = value
 		emit_changed()
 @export var color = Color.WHITE
+@export var faction = Constants.Faction.DEFAULT
 
 var _color_material = null
 

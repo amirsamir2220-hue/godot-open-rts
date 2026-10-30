@@ -39,7 +39,7 @@ theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 20
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer"]
-custom_minimum_size = Vector2(600, 0)
+custom_minimum_size = Vector2(760, 0)
 layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
@@ -127,7 +127,7 @@ grow_vertical = 2
 custom_minimum_size = Vector2(0, 556)
 layout_mode = 2
 theme_override_constants/h_separation = 5
-columns = 2
+columns = 3
 
 [node name="Label0" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -146,6 +146,16 @@ popup/item_1/id = 1
 popup/item_2/text = "Simple AI"
 popup/item_2/id = 2
 
+[node name="FactionButton0" type="OptionButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+focus_mode = 0
+item_count = 2
+selected = 0
+popup/item_0/text = "FACTION_USA"
+popup/item_0/id = 0
+popup/item_1/text = "FACTION_RUSSIA"
+popup/item_1/id = 1
+
 [node name="Label1" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "2."
@@ -162,6 +172,16 @@ popup/item_1/text = "Human"
 popup/item_1/id = 1
 popup/item_2/text = "Simple AI"
 popup/item_2/id = 2
+
+[node name="FactionButton1" type="OptionButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+focus_mode = 0
+item_count = 2
+selected = 0
+popup/item_0/text = "FACTION_USA"
+popup/item_0/id = 0
+popup/item_1/text = "FACTION_RUSSIA"
+popup/item_1/id = 1
 
 [node name="Label2" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -180,6 +200,16 @@ popup/item_1/id = 1
 popup/item_2/text = "Simple AI"
 popup/item_2/id = 2
 
+[node name="FactionButton2" type="OptionButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+focus_mode = 0
+item_count = 2
+selected = 0
+popup/item_0/text = "FACTION_USA"
+popup/item_0/id = 0
+popup/item_1/text = "FACTION_RUSSIA"
+popup/item_1/id = 1
+
 [node name="Label3" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "4."
@@ -196,6 +226,16 @@ popup/item_1/text = "Human"
 popup/item_1/id = 1
 popup/item_2/text = "Simple AI"
 popup/item_2/id = 2
+
+[node name="FactionButton3" type="OptionButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+focus_mode = 0
+item_count = 2
+selected = 0
+popup/item_0/text = "FACTION_USA"
+popup/item_0/id = 0
+popup/item_1/text = "FACTION_RUSSIA"
+popup/item_1/id = 1
 
 [node name="Label4" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -214,6 +254,16 @@ popup/item_1/id = 1
 popup/item_2/text = "Simple AI"
 popup/item_2/id = 2
 
+[node name="FactionButton4" type="OptionButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+focus_mode = 0
+item_count = 2
+selected = 0
+popup/item_0/text = "FACTION_USA"
+popup/item_0/id = 0
+popup/item_1/text = "FACTION_RUSSIA"
+popup/item_1/id = 1
+
 [node name="Label5" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "6."
@@ -230,6 +280,16 @@ popup/item_1/text = "Human"
 popup/item_1/id = 1
 popup/item_2/text = "Simple AI"
 popup/item_2/id = 2
+
+[node name="FactionButton5" type="OptionButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+focus_mode = 0
+item_count = 2
+selected = 0
+popup/item_0/text = "FACTION_USA"
+popup/item_0/id = 0
+popup/item_1/text = "FACTION_RUSSIA"
+popup/item_1/id = 1
 
 [node name="Label6" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -248,6 +308,16 @@ popup/item_1/id = 1
 popup/item_2/text = "Simple AI"
 popup/item_2/id = 2
 
+[node name="FactionButton6" type="OptionButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+focus_mode = 0
+item_count = 2
+selected = 0
+popup/item_0/text = "FACTION_USA"
+popup/item_0/id = 0
+popup/item_1/text = "FACTION_RUSSIA"
+popup/item_1/id = 1
+
 [node name="Label7" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "8."
@@ -264,6 +334,16 @@ popup/item_1/text = "Human"
 popup/item_1/id = 1
 popup/item_2/text = "Simple AI"
 popup/item_2/id = 2
+
+[node name="FactionButton7" type="OptionButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+focus_mode = 0
+item_count = 2
+selected = 0
+popup/item_0/text = "FACTION_USA"
+popup/item_0/id = 0
+popup/item_1/text = "FACTION_RUSSIA"
+popup/item_1/id = 1
 
 [node name="Label8" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -282,6 +362,16 @@ popup/item_1/id = 1
 popup/item_2/text = "Simple AI"
 popup/item_2/id = 2
 
+[node name="FactionButton8" type="OptionButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+focus_mode = 0
+item_count = 2
+selected = 0
+popup/item_0/text = "FACTION_USA"
+popup/item_0/id = 0
+popup/item_1/text = "FACTION_RUSSIA"
+popup/item_1/id = 1
+
 [node name="Label9" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "10."
@@ -298,6 +388,16 @@ popup/item_1/text = "Human"
 popup/item_1/id = 1
 popup/item_2/text = "Simple AI"
 popup/item_2/id = 2
+
+[node name="FactionButton9" type="OptionButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+focus_mode = 0
+item_count = 2
+selected = 0
+popup/item_0/text = "FACTION_USA"
+popup/item_0/id = 0
+popup/item_1/text = "FACTION_RUSSIA"
+popup/item_1/id = 1
 
 [node name="Label10" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -316,6 +416,16 @@ popup/item_1/id = 1
 popup/item_2/text = "Simple AI"
 popup/item_2/id = 2
 
+[node name="FactionButton10" type="OptionButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+focus_mode = 0
+item_count = 2
+selected = 0
+popup/item_0/text = "FACTION_USA"
+popup/item_0/id = 0
+popup/item_1/text = "FACTION_RUSSIA"
+popup/item_1/id = 1
+
 [node name="Label11" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "12."
@@ -332,6 +442,16 @@ popup/item_1/text = "Human"
 popup/item_1/id = 1
 popup/item_2/text = "Simple AI"
 popup/item_2/id = 2
+
+[node name="FactionButton11" type="OptionButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+focus_mode = 0
+item_count = 2
+selected = 0
+popup/item_0/text = "FACTION_USA"
+popup/item_0/id = 0
+popup/item_1/text = "FACTION_RUSSIA"
+popup/item_1/id = 1
 
 [node name="Label12" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -350,6 +470,16 @@ popup/item_1/id = 1
 popup/item_2/text = "Simple AI"
 popup/item_2/id = 2
 
+[node name="FactionButton12" type="OptionButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+focus_mode = 0
+item_count = 2
+selected = 0
+popup/item_0/text = "FACTION_USA"
+popup/item_0/id = 0
+popup/item_1/text = "FACTION_RUSSIA"
+popup/item_1/id = 1
+
 [node name="Label13" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "14."
@@ -366,6 +496,16 @@ popup/item_1/text = "Human"
 popup/item_1/id = 1
 popup/item_2/text = "Simple AI"
 popup/item_2/id = 2
+
+[node name="FactionButton13" type="OptionButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+focus_mode = 0
+item_count = 2
+selected = 0
+popup/item_0/text = "FACTION_USA"
+popup/item_0/id = 0
+popup/item_1/text = "FACTION_RUSSIA"
+popup/item_1/id = 1
 
 [node name="Label14" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
@@ -384,6 +524,16 @@ popup/item_1/id = 1
 popup/item_2/text = "Simple AI"
 popup/item_2/id = 2
 
+[node name="FactionButton14" type="OptionButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+focus_mode = 0
+item_count = 2
+selected = 0
+popup/item_0/text = "FACTION_USA"
+popup/item_0/id = 0
+popup/item_1/text = "FACTION_RUSSIA"
+popup/item_1/id = 1
+
 [node name="Label15" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
 layout_mode = 2
 text = "16."
@@ -400,6 +550,16 @@ popup/item_1/text = "Human"
 popup/item_1/id = 1
 popup/item_2/text = "Simple AI"
 popup/item_2/id = 2
+
+[node name="FactionButton15" type="OptionButton" parent="PanelContainer/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+focus_mode = 0
+item_count = 2
+selected = 0
+popup/item_0/text = "FACTION_USA"
+popup/item_0/id = 0
+popup/item_1/text = "FACTION_RUSSIA"
+popup/item_1/id = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2

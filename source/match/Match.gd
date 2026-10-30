@@ -107,6 +107,7 @@ func _create_players_from_settings():
 		var player_scene = Constants.Match.Player.CONTROLLER_SCENES[player_settings.controller]
 		var player = player_scene.instantiate()
 		player.color = player_settings.color
+		player.faction = player_settings.faction
 		if player_settings.spawn_index_offset > 0:
 			for _i in range(player_settings.spawn_index_offset):
 				_players.add_child(Node.new())

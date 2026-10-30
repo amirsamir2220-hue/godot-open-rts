@@ -5,6 +5,8 @@ const PlayerSettings = preload("res://source/data-model/PlayerSettings.gd")
 const LoadingScene = preload("res://source/main-menu/Loading.tscn")
 
 var _map_paths = []
+# AI slots whose faction was picked by hand; others follow the human (opposite faction)
+var _ai_slots_with_manual_faction = {}
 
 @onready var _start_button = find_child("StartButton")
 @onready var _map_list = find_child("MapList")
@@ -17,6 +19,46 @@ func _ready():
 	var option_nodes = find_child("GridContainer").find_children("OptionButton*")
 	for option_node_id in range(option_nodes.size()):
 		option_nodes[option_node_id].item_selected.connect(_on_player_selected.bind(option_node_id))
+	var faction_nodes = _get_faction_nodes()
+	for faction_node_id in range(faction_nodes.size()):
+		faction_nodes[faction_node_id].item_selected.connect(
+			_on_faction_selected.bind(faction_node_id)
+		)
+	_refresh_faction_pickers()
+
+
+func _get_option_nodes():
+	return find_child("GridContainer").find_children("OptionButton*")
+
+
+func _get_faction_nodes():
+	return find_child("GridContainer").find_children("FactionButton*")
+
+
+func _get_human_faction():
+	var option_nodes = _get_option_nodes()
+	var faction_nodes = _get_faction_nodes()
+	for node_id in range(option_nodes.size()):
+		if option_nodes[node_id].selected == Constants.PlayerType.HUMAN:
+			return Constants.Faction.ALL[faction_nodes[node_id].selected]
+	return null
+
+
+func _refresh_faction_pickers():
+	var option_nodes = _get_option_nodes()
+	var faction_nodes = _get_faction_nodes()
+	var human_faction = _get_human_faction()
+	for node_id in range(option_nodes.size()):
+		var controller = option_nodes[node_id].selected
+		faction_nodes[node_id].disabled = controller == Constants.PlayerType.NONE
+		if (
+			controller == Constants.PlayerType.SIMPLE_CLAIRVOYANT_AI
+			and human_faction != null
+			and not node_id in _ai_slots_with_manual_faction
+		):
+			faction_nodes[node_id].selected = Constants.Faction.ALL.find(
+				Constants.Faction.opposite(human_faction)
+			)
 
 
 func _setup_map_list():
@@ -32,7 +74,8 @@ func _setup_map_list():
 func _create_match_settings():
 	var match_settings = MatchSettings.new()
 
-	var option_nodes = find_child("GridContainer").find_children("OptionButton*")
+	var option_nodes = _get_option_nodes()
+	var faction_nodes = _get_faction_nodes()
 	var spawn_index_offset = 0
 	for option_node_id in range(option_nodes.size()):
 		var player_controller = option_nodes[option_node_id].selected
@@ -40,6 +83,7 @@ func _create_match_settings():
 			var player_settings = PlayerSettings.new()
 			player_settings.controller = player_controller
 			player_settings.color = Constants.Player.COLORS[option_node_id]
+			player_settings.faction = Constants.Faction.ALL[faction_nodes[option_node_id].selected]
 			player_settings.spawn_index_offset = spawn_index_offset
 			match_settings.players.append(player_settings)
 			spawn_index_offset = 0
@@ -76,16 +120,20 @@ func _on_back_button_pressed():
 
 
 func _align_player_controls_visibility_to_map(map):
-	var option_nodes = find_child("GridContainer").find_children("OptionButton*")
+	var option_nodes = _get_option_nodes()
+	var faction_nodes = _get_faction_nodes()
 	var label_nodes = find_child("GridContainer").find_children("Label*")
 	assert(option_nodes.size() == label_nodes.size())
+	assert(option_nodes.size() == faction_nodes.size())
 	for node_id in range(option_nodes.size()):
 		option_nodes[node_id].visible = node_id < map["players"]
+		faction_nodes[node_id].visible = node_id < map["players"]
 		label_nodes[node_id].visible = node_id < map["players"]
 
 
 func _on_player_selected(selected_option_id, selected_player_id):
 	_start_button.disabled = false
+	_ai_slots_with_manual_faction.erase(selected_player_id)
 	if selected_option_id == Constants.PlayerType.HUMAN:
 		var option_nodes = find_child("GridContainer").find_children("OptionButton*")
 		for option_node_id in range(option_nodes.size()):
@@ -102,6 +150,16 @@ func _on_player_selected(selected_option_id, selected_player_id):
 		)
 		if option_nodes_with_player_controllers.size() < 2:
 			_start_button.disabled = true
+	_refresh_faction_pickers()
+
+
+func _on_faction_selected(_selected_faction_id, selected_player_id):
+	var controller = _get_option_nodes()[selected_player_id].selected
+	if controller == Constants.PlayerType.HUMAN:
+		_ai_slots_with_manual_faction.clear()
+	elif controller == Constants.PlayerType.SIMPLE_CLAIRVOYANT_AI:
+		_ai_slots_with_manual_faction[selected_player_id] = true
+	_refresh_faction_pickers()
 
 
 func _on_map_list_item_selected(index):

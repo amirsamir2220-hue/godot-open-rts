@@ -29,3 +29,5 @@ VEHICLE_FACTORY,Vehicle factory,Fabryka pojazdów
 VEHICLE_FACTORY_DESCRIPTION,produces vehicles,wytwarza pojazdy
 AIRCRAFT_FACTORY,Aircraft factory,Fabryka jednostek powietrznych
 AIRCRAFT_FACTORY_DESCRIPTION,produces air units,wytwarza jednostki powietrzne
+FACTION_USA,USA,USA
+FACTION_RUSSIA,Russia,Rosja
