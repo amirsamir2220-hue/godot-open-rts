@@ -43,6 +43,9 @@ func _start_attacking():
 
 
 func _attack_next_adversary_unit():
+	# called from a timer too: the whole battlegroup may have died in the meantime
+	if not is_inside_tree() or _attached_units.is_empty():
+		return
 	var adversary_units = get_tree().get_nodes_in_group("units").filter(
 		func(unit): return unit.player == _player_to_attack
 	)
