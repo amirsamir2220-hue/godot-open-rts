@@ -144,17 +144,22 @@ static func _add_team_pennant(root):
 
 ## Adds two counter-rotating blade sets at the top of the model (Ka-52 style).
 static func _add_coaxial_rotor(root, rotor, blade_count, radius):
-	var top = _meshes_aabb(root, root)
-	var hub = Vector3(0, top.end.y - 0.02, 0)
+	var full = _meshes_aabb(root, root)
+	# upper blades on the model's rotor head, lower blades a little below it on the same mast
+	var hub = Vector3(0, full.end.y - 0.02, 0)
 	if rotor == null:
 		rotor = K.pivot("Rotor")
 		root.add_child(rotor)
+	else:
+		var head = _meshes_aabb(rotor, root)
+		hub = Vector3(head.get_center().x, head.get_center().y, head.get_center().z)
+	var gap = radius * 0.22
 	var old_placement = rotor.transform
 	rotor.position = hub
 	for child in rotor.get_children():
 		child.transform = rotor.transform.affine_inverse() * old_placement * child.transform
 	rotor.add_child(K.mesh_node("Blades", _blades(blade_count, radius)))
-	var lower = K.spinner("RotorLower", K.xf(hub - Vector3(0, 0.09, 0)), Vector3.UP, -800.0)
+	var lower = K.spinner("RotorLower", K.xf(hub - Vector3(0, gap, 0)), Vector3.UP, -800.0)
 	lower.add_child(K.mesh_node("Blades", _blades(blade_count, radius)))
 	root.add_child(lower)
 	return rotor
@@ -168,10 +173,10 @@ static func _blades(blade_count, radius):
 				K.xf(Vector3.ZERO, Vector3(0, i * 360.0 / blade_count, 0))
 				* K.xf(Vector3(0, 0, -radius * 0.5))
 			),
-			Vector3(0.05, 0.01, radius),
+			Vector3(0.045, 0.006, radius),
 			K.Palette.DARK
 		)
-	b.cylinder(K.xf(), 0.04, 0.04, 0.04, K.Palette.METAL, 6)
+	b.cylinder(K.xf(), 0.025, 0.025, 0.03, K.Palette.DARK, 6)
 	return b
 
 

@@ -69,22 +69,6 @@ layout_mode = 2
 custom_minimum_size = Vector2(48, 48)
 layout_mode = 2
 
-[node name="Panel13" type="Panel" parent="MarginContainer/BackgroundGrid"]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Panel14" type="Panel" parent="MarginContainer/BackgroundGrid"]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Panel15" type="Panel" parent="MarginContainer/BackgroundGrid"]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
-[node name="Panel16" type="Panel" parent="MarginContainer/BackgroundGrid"]
-custom_minimum_size = Vector2(48, 48)
-layout_mode = 2
-
 [node name="GenericMenu" parent="MarginContainer" instance=ExtResource("1_4ci70")]
 layout_mode = 2
 mouse_filter = 2
