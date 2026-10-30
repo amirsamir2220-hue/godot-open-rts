@@ -66,6 +66,12 @@ during the run) must be fixed.
 - Add a faction picker per player slot in `source/main-menu/Play.tscn`.
 - AI slots default to the opposite faction of the human player.
 
+### Phase 2B - Game modes: Death Match (done early)
+- `Constants.GameMode`: `normal` (start at 0) and `death_match` (Generals-style: everyone
+  starts with a big pile of supplies/fuel and the AI fields a bigger army).
+- Picked in the Play menu (`ModeOptionButton`), stored in `MatchSettings.mode`, applied in
+  `Match._apply_game_mode`. Tune the amounts in `Constants.GameMode.STARTING_RESOURCES`.
+
 ### Phase 3 - Models
 Low-poly models per faction for all 9 unit types:
 
@@ -170,6 +176,7 @@ Design rules:
 
 - [x] Phase 1 - Performance
 - [x] Phase 2 - Factions
+- [x] Phase 2B - Game modes: Death Match
 - [x] Phase 3 - Models
 - [x] Phase 3B - Motion
 - [x] Phase 4 - UI

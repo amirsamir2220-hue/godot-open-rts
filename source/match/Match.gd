@@ -108,10 +108,24 @@ func _create_players_from_settings():
 		var player = player_scene.instantiate()
 		player.color = player_settings.color
 		player.faction = player_settings.faction
+		_apply_game_mode(player)
 		if player_settings.spawn_index_offset > 0:
 			for _i in range(player_settings.spawn_index_offset):
 				_players.add_child(Node.new())
 		_players.add_child(player)
+
+
+func _apply_game_mode(player):
+	var mode = (
+		settings.mode if settings.mode in Constants.GameMode.ALL else Constants.GameMode.NORMAL
+	)
+	var starting_resources = Constants.GameMode.STARTING_RESOURCES[mode]
+	for resource in starting_resources:
+		player.set(resource, starting_resources[resource])
+	var ai_overrides = Constants.GameMode.AI_OVERRIDES[mode]
+	for property in ai_overrides:
+		if property in player:
+			player.set(property, ai_overrides[property])
 
 
 func _setup_player_units():

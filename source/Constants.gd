@@ -21,6 +21,31 @@ class Faction:
 		return RUSSIA if faction == USA else USA
 
 
+class GameMode:
+	const NORMAL = "normal"
+	const DEATH_MATCH = "death_match"  # Generals-style: huge starting money, focus on fighting
+	const ALL = [NORMAL, DEATH_MATCH]
+	const NAMES = {
+		NORMAL: "MODE_NORMAL",
+		DEATH_MATCH: "MODE_DEATH_MATCH",
+	}
+	const STARTING_RESOURCES = {
+		NORMAL: {"resource_a": 0, "resource_b": 0},
+		DEATH_MATCH: {"resource_a": 500, "resource_b": 500},
+	}
+	# AI players are told to field a bigger army when money is not the limit
+	const AI_OVERRIDES = {
+		NORMAL: {},
+		DEATH_MATCH:
+		{
+			"expected_number_of_ag_turrets": 2,
+			"expected_number_of_aa_turrets": 2,
+			"expected_number_of_battlegroups": 4,
+			"expected_number_of_units_in_battlegroup": 6,
+		},
+	}
+
+
 class Match:
 	extends "res://source/match/MatchConstants.gd"
 

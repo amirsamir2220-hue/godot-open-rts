@@ -10,3 +10,8 @@ START,Start,Rozpocznij
 FACTION,Faction,Frakcja
 FACTION_USA,USA,USA
 FACTION_RUSSIA,Russia,Rosja
+GAME_MODE,Game mode,Tryb gry
+MODE_NORMAL,Normal,Normalny
+MODE_NORMAL_DESCRIPTION,Start from zero: supply trucks gather supplies and fuel.,"Start od zera: ciężarówki zbierają zaopatrzenie i paliwo."
+MODE_DEATH_MATCH,Death Match,Death Match
+MODE_DEATH_MATCH_DESCRIPTION,"Everyone starts with {0} supplies and {1} fuel. Build a big army fast and fight!","Każdy zaczyna z {0} zaopatrzenia i {1} paliwa. Szybko zbuduj dużą armię i walcz!"

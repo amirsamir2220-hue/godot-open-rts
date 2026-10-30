@@ -11,10 +11,13 @@ var _ai_slots_with_manual_faction = {}
 @onready var _start_button = find_child("StartButton")
 @onready var _map_list = find_child("MapList")
 @onready var _map_details = find_child("MapDetailsLabel")
+@onready var _mode_button = find_child("ModeOptionButton")
+@onready var _mode_details = find_child("ModeDetailsLabel")
 
 
 func _ready():
 	_setup_map_list()
+	_setup_mode_list()
 	_on_map_list_item_selected(0)
 	var option_nodes = find_child("GridContainer").find_children("OptionButton*")
 	for option_node_id in range(option_nodes.size()):
@@ -71,8 +74,30 @@ func _setup_map_list():
 	_map_list.select(0)
 
 
+func _setup_mode_list():
+	_mode_button.clear()
+	for mode in Constants.GameMode.ALL:
+		_mode_button.add_item(tr(Constants.GameMode.NAMES[mode]))
+	_mode_button.select(0)
+	_mode_button.item_selected.connect(_on_mode_selected)
+	_on_mode_selected(0)
+
+
+func _get_selected_mode():
+	return Constants.GameMode.ALL[_mode_button.selected]
+
+
+func _on_mode_selected(index):
+	var mode = Constants.GameMode.ALL[index]
+	var starting_resources = Constants.GameMode.STARTING_RESOURCES[mode]
+	_mode_details.text = tr(Constants.GameMode.NAMES[mode] + "_DESCRIPTION").format(
+		[starting_resources["resource_a"], starting_resources["resource_b"]]
+	)
+
+
 func _create_match_settings():
 	var match_settings = MatchSettings.new()
+	match_settings.mode = _get_selected_mode()
 
 	var option_nodes = _get_option_nodes()
 	var faction_nodes = _get_faction_nodes()
@@ -143,10 +168,8 @@ func _on_player_selected(selected_option_id, selected_player_id):
 			):
 				option_nodes[option_node_id].selected = (Constants.PlayerType.SIMPLE_CLAIRVOYANT_AI)
 	elif selected_option_id == Constants.PlayerType.NONE:
-		var option_nodes_with_player_controllers = (
-			find_child("GridContainer")
-			. find_children("OptionButton*")
-			. filter(func(option_node): return option_node.selected != Constants.PlayerType.NONE)
+		var option_nodes_with_player_controllers = _get_option_nodes().filter(
+			func(option_node): return option_node.selected != Constants.PlayerType.NONE
 		)
 		if option_nodes_with_player_controllers.size() < 2:
 			_start_button.disabled = true
