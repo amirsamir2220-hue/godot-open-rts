@@ -6,28 +6,46 @@ LOADING_STEP_INSTANTIATING_MATCH,Setting up a camera...,Ustawianie kamery...
 LOADING_STEP_STARTING_MATCH,Placing units in the field...,Rozmieszczanie jednostek...
 BLUEPRINT_COLLIDES_WITH_OBJECT,Something already ocuppies that spot,Inny obiekt jest zbyt blisko
 BLUEPRINT_NOT_NAVIGABLE,Irregular terrain,Nierówny teren
-BLUEPRINT_NOT_ENOUGH_RESOURCES,Not enough resources,Brakuje zasobów
+BLUEPRINT_NOT_ENOUGH_RESOURCES,Not enough supplies or fuel,Brakuje zaopatrzenia lub paliwa
 BLUEPRINT_OUT_OF_MAP,Out of map limits,Poza granicami mapy
-RESOURCE_A,Blue Crystal,Niebieski Kryształ
-RESOURCE_B,Red Crystal,Czerwony Kryształ
+RESOURCE_A,Supplies,Zaopatrzenie
+RESOURCE_B,Fuel,Paliwo
 CANCEL_CURRENT_ACTION,Cancel current action,Anuluj aktualną akcję
-WORKER,Worker,Robotnik
-WORKER_DESCRIPTION,collects resources,zbiera zasoby
-HELICOPTER,Helicopter,Helikopter
+WORKER,Supply truck,Ciężarówka zaopatrzenia
+WORKER_DESCRIPTION,hauls supplies and fuel,przewozi zaopatrzenie i paliwo
+HELICOPTER,Attack helicopter,Śmigłowiec szturmowy
 HELICOPTER_DESCRIPTION,fights ground and air targets,zwlacza cele naziemne i powietrzne
-DRONE,Scout drone,Dron zwiadoczy
+DRONE,Recon drone,Dron zwiadowczy
 DRONE_DESCRIPTION,performs scouting,wykonuje loty zwiadowcze
-TANK,Tank,Czołg
+TANK,Main battle tank,Czołg podstawowy
 TANK_DESCRIPTION,fights ground targets,zwalcza cele naziemne
-AG_TURRET,Anti-ground turret,Wieżyczka przeciwpancerna
-AG_TURRET_DESCRIPTION,fights ground targets,zwalcza cele naziemne
-AA_TURRET,Anti-air turret,Wieżyczka przeciwlotnicza
-AA_TURRET_DESCRIPTION,fights air targets,zwalcza cele powietrzne
-CC,Command center,Centrum dowodzenia
-CC_DESCRIPTION,produces workers,produkuje robotników
-VEHICLE_FACTORY,Vehicle factory,Fabryka pojazdów
-VEHICLE_FACTORY_DESCRIPTION,produces vehicles,wytwarza pojazdy
-AIRCRAFT_FACTORY,Aircraft factory,Fabryka jednostek powietrznych
-AIRCRAFT_FACTORY_DESCRIPTION,produces air units,wytwarza jednostki powietrzne
+AG_TURRET,Anti-tank post,Stanowisko przeciwpancerne
+AG_TURRET_DESCRIPTION,"ATGM team, fights ground targets","zespół ppk, zwalcza cele naziemne"
+AA_TURRET,Air defense,Obrona przeciwlotnicza
+AA_TURRET_DESCRIPTION,"SAM system, fights air targets","zestaw rakietowy, zwalcza cele powietrzne"
+CC,Command HQ,Kwatera główna
+CC_DESCRIPTION,produces supply trucks,produkuje ciężarówki zaopatrzenia
+VEHICLE_FACTORY,War factory,Fabryka wojenna
+VEHICLE_FACTORY_DESCRIPTION,produces tanks,produkuje czołgi
+AIRCRAFT_FACTORY,Helipad,Lądowisko
+AIRCRAFT_FACTORY_DESCRIPTION,produces helicopters and drones,produkuje śmigłowce i drony
 FACTION_USA,USA,USA
 FACTION_RUSSIA,Russia,Rosja
+USA_WORKER,HEMTT supply truck,Ciężarówka HEMTT
+RUSSIA_WORKER,KamAZ supply truck,Ciężarówka KamAZ
+USA_TANK,M1A2 Abrams,M1A2 Abrams
+RUSSIA_TANK,T-90M,T-90M
+USA_HELICOPTER,AH-64 Apache,AH-64 Apache
+RUSSIA_HELICOPTER,Ka-52 Alligator,Ka-52 Aligator
+USA_DRONE,RQ-7 Shadow,RQ-7 Shadow
+RUSSIA_DRONE,Orlan-10,Orłan-10
+USA_CC,Command HQ,Kwatera główna
+RUSSIA_CC,Command HQ,Kwatera główna
+USA_VEHICLE_FACTORY,War factory,Fabryka wojenna
+RUSSIA_VEHICLE_FACTORY,War factory,Fabryka wojenna
+USA_AIRCRAFT_FACTORY,Helipad,Lądowisko
+RUSSIA_AIRCRAFT_FACTORY,Helipad,Lądowisko
+USA_AG_TURRET,Javelin post,Stanowisko Javelin
+RUSSIA_AG_TURRET,Kornet post,Stanowisko Kornet
+USA_AA_TURRET,Patriot battery,Bateria Patriot
+RUSSIA_AA_TURRET,Pantsir-S1,Pancyr-S1

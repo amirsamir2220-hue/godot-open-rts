@@ -3,7 +3,8 @@
 # Run (needs a GPU / OpenGL context, not --headless):
 #   godot res://source/utils/IconRenderBooth.tscn
 #   godot res://source/utils/IconRenderBooth.tscn -- out_dir=/tmp/icons size=512 types=Tank,Worker
-# Icons are written to `<out_dir>/<faction>/<Type>.png` (default: res://assets/ui/icons/units).
+# Icons are written to `<out_dir>/<faction>/<Type>.png` (default: res://assets/ui/icons);
+# faction-neutral models (resources) go to `<out_dir>/neutral/`.
 extends Node3D
 
 const FactionModels = preload("res://source/match/units/models/FactionModels.gd")
@@ -19,10 +20,11 @@ const TYPES = [
 	"AntiGroundTurret",
 	"AntiAirTurret",
 ]
+const NEUTRAL_TYPES = ["ResourceA", "ResourceB"]
 const VIEW_DIRECTION = Vector3(-1.0, 0.9, -1.0)  # from the front-left, like the match camera
 const SUPERSAMPLING = 2
 
-@export var output_dir = "res://assets/ui/icons/units"
+@export var output_dir = "res://assets/ui/icons"
 @export var icon_size = 128
 @export var team_color = Color("d9c38a")
 
@@ -37,6 +39,8 @@ func _ready():
 	icon_size = int(args.get("size", icon_size))
 	var types = args["types"].split(",") if args.has("types") else TYPES
 	await render_all(types, Constants.Faction.ALL)
+	if not args.has("types"):
+		await render_all(NEUTRAL_TYPES, [FactionModels.NEUTRAL])
 	get_tree().quit()
 
 

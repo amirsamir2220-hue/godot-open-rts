@@ -64,6 +64,7 @@ func _try_showing_any_menu():
 		_aircraft_factory_menu.show()
 		return true
 	if selected_controlled_units.size() == 1 and selected_controlled_units[0] is Worker:
+		_worker_menu.unit = selected_controlled_units[0]
 		_worker_menu.show()
 	if selected_controlled_units.size() > 0:
 		_generic_menu.units = selected_controlled_units

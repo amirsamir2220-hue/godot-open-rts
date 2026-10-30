@@ -1,26 +1,26 @@
 extends GridContainer
 
+const FactionUi = preload("res://source/match/hud/FactionUi.gd")
 const TankUnit = preload("res://source/match/units/Tank.tscn")
 
-var unit = null
+var unit = null:
+	set(value):
+		unit = value
+		_refresh()
 
 @onready var _tank_button = find_child("ProduceTankButton")
 
 
 func _ready():
-	var tank_properties = Constants.Match.Units.DEFAULT_PROPERTIES[TankUnit.resource_path]
-	_tank_button.tooltip_text = ("{0} - {1}\n{2} HP, {3} DPS\n{4}: {5}, {6}: {7}".format(
-		[
-			tr("TANK"),
-			tr("TANK_DESCRIPTION"),
-			tank_properties["hp_max"],
-			tank_properties["attack_damage"] * tank_properties["attack_interval"],
-			tr("RESOURCE_A"),
-			Constants.Match.Units.PRODUCTION_COSTS[TankUnit.resource_path]["resource_a"],
-			tr("RESOURCE_B"),
-			Constants.Match.Units.PRODUCTION_COSTS[TankUnit.resource_path]["resource_b"]
-		]
-	))
+	_refresh()
+
+
+func _refresh():
+	if not is_node_ready():
+		return
+	var faction = FactionUi.faction_of(unit)
+	var costs = Constants.Match.Units.PRODUCTION_COSTS
+	FactionUi.setup_button(_tank_button, TankUnit, faction, costs)
 
 
 func _on_produce_tank_button_pressed():

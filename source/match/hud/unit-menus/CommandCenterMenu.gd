@@ -1,24 +1,26 @@
 extends GridContainer
 
+const FactionUi = preload("res://source/match/hud/FactionUi.gd")
 const WorkerUnit = preload("res://source/match/units/Worker.tscn")
 
-var unit = null
+var unit = null:
+	set(value):
+		unit = value
+		_refresh()
 
 @onready var _worker_button = find_child("ProduceWorkerButton")
 
 
 func _ready():
-	_worker_button.tooltip_text = ("{0} - {1}\n{2} HP\n{3}: {4}, {5}: {6}".format(
-		[
-			tr("WORKER"),
-			tr("WORKER_DESCRIPTION"),
-			Constants.Match.Units.DEFAULT_PROPERTIES[WorkerUnit.resource_path]["hp_max"],
-			tr("RESOURCE_A"),
-			Constants.Match.Units.PRODUCTION_COSTS[WorkerUnit.resource_path]["resource_a"],
-			tr("RESOURCE_B"),
-			Constants.Match.Units.PRODUCTION_COSTS[WorkerUnit.resource_path]["resource_b"]
-		]
-	))
+	_refresh()
+
+
+func _refresh():
+	if not is_node_ready():
+		return
+	var faction = FactionUi.faction_of(unit)
+	var costs = Constants.Match.Units.PRODUCTION_COSTS
+	FactionUi.setup_button(_worker_button, WorkerUnit, faction, costs)
 
 
 func _on_produce_worker_button_pressed():

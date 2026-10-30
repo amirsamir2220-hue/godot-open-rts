@@ -47,14 +47,13 @@ class Terrain:
 
 
 class Resources:
+	# A = Supplies (crates), B = Fuel (drums); internal names stay resource_a / resource_b
 	class A:
-		const COLOR = Color.BLUE
-		const MATERIAL_PATH = "res://source/match/resources/materials/resource_a.material.tres"
+		const COLOR = Color("d1a54f")
 		const COLLECTING_TIME_S = 1.0
 
 	class B:
-		const COLOR = Color.RED
-		const MATERIAL_PATH = "res://source/match/resources/materials/resource_b.material.tres"
+		const COLOR = Color("e2622a")
 		const COLLECTING_TIME_S = 2.0
 
 

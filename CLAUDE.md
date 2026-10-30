@@ -33,6 +33,12 @@ during the run) must be fixed.
   turret tracking, heli/drone banking, recoil, muzzle flash). Added by `Unit` at runtime.
 - `source/match/units/effects/DeathEffect.gd` - wreck + fireball + smoke on unit death.
 - `source/utils/IconRenderBooth.tscn` - renders models to icons/previews (needs a GPU).
+  Re-run it after changing a model: `godot res://source/utils/IconRenderBooth.tscn` writes
+  `assets/ui/icons/<usa|russia|neutral>/<Type>.png`.
+- `source/match/hud/FactionUi.gd` - faction unit names (`USA_TANK`, `RUSSIA_TANK`, ... in
+  `assets/translations/match.csv`), tooltips and icons for HUD buttons.
+- Resources: `resource_a` = **Supplies** (crates), `resource_b` = **Fuel** (drums); internal
+  names are unchanged, only display names/models/colors.
 - `tests/manual/TestFactions.tscn` - both factions side by side, all 9 unit types.
 
 ## Plan
@@ -153,7 +159,7 @@ Design rules:
 - [x] Phase 2 - Factions
 - [x] Phase 3 - Models
 - [x] Phase 3B - Motion
-- [ ] Phase 4 - UI
+- [x] Phase 4 - UI
 - [ ] Phase 5 - Desert look
 - [ ] Phase 6 - Graphics settings menu
 - [ ] Phase 7 - VFX

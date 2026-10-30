@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" path="res://source/match/units/non-player/ResourceB.gd" id="1_57n8v"]
 [ext_resource type="PackedScene" uid="uid://cgsi062w5fjia" path="res://source/match/units/traits/Highlight.tscn" id="2_c8mwe"]
-[ext_resource type="PackedScene" uid="uid://cqi7sb6vpnwt5" path="res://assets/models/kenney-spacekit/rock_crystalsLargeB.glb" id="2_ox5xj"]
 [ext_resource type="PackedScene" uid="uid://3c1h14nqdumt" path="res://source/match/units/traits/Selection.tscn" id="3_6dh54"]
 [ext_resource type="PackedScene" uid="uid://d4cwip5hpxlmo" path="res://source/match/units/traits/MovementObstacle.tscn" id="4_sxjck"]
 [ext_resource type="PackedScene" uid="uid://d4cm4yhtf11ur" path="res://source/match/units/traits/Targetability.tscn" id="5_y6273"]
@@ -19,8 +18,6 @@ script = ExtResource("1_57n8v")
 
 [node name="Geometry" type="Node3D" parent="."]
 
-[node name="rock_crystalsLargeB" parent="Geometry" instance=ExtResource("2_ox5xj")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.0503, 0, -1.5)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, 0)

@@ -44,6 +44,19 @@ layout_mode = 2
 theme_override_constants/separation = 10
 alignment = 1
 
+[node name="TitleLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.909804, 0.756863, 0.454902, 1)
+theme_override_font_sizes/font_size = 44
+text = "DESERT COMMAND"
+horizontal_alignment = 1
+
+[node name="SubtitleLabel" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.8, 0.78, 0.72, 1)
+text = "USA vs Russia"
+horizontal_alignment = 1
+
 [node name="Button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "PLAY"

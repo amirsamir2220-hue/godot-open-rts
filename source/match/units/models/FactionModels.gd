@@ -7,6 +7,9 @@
 const ModelKit = preload("res://source/match/units/models/ModelKit.gd")
 const UsaModels = preload("res://source/match/units/models/UsaModels.gd")
 const RussiaModels = preload("res://source/match/units/models/RussiaModels.gd")
+const NeutralModels = preload("res://source/match/units/models/NeutralModels.gd")
+
+const NEUTRAL = "neutral"
 
 const MODEL_OVERRIDES = {
 # "usa/Tank": "res://assets/models/desert-command/usa/m1a2.tscn",
@@ -92,6 +95,8 @@ static func _key(type, faction):
 
 
 static func _builders_for(faction):
+	if faction == NEUTRAL:
+		return NeutralModels.builders()
 	if faction == Constants.Faction.RUSSIA:
 		return RussiaModels.builders()
 	return UsaModels.builders()
