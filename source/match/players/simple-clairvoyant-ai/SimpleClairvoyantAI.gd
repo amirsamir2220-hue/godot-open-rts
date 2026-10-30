@@ -11,6 +11,8 @@ enum OffensiveStructure { VEHICLE_FACTORY, AIRCRAFT_FACTORY }
 @export var secondary_offensive_structure = OffensiveStructure.AIRCRAFT_FACTORY
 @export var expected_number_of_battlegroups = 2
 @export var expected_number_of_units_in_battlegroup = 4
+## seconds the AI waits before it starts building and attacking (AI difficulty)
+@export var start_delay_s = 0.0
 
 var _provisioning_ongoing = false
 var _resource_requests = {
@@ -35,6 +37,8 @@ func _ready():
 		await _match.ready
 	# wait additional frame to make sure other players are in place
 	await get_tree().physics_frame
+	if start_delay_s > 0.0:
+		await get_tree().create_timer(start_delay_s, false).timeout
 
 	changed.connect(_on_player_data_changed)
 	_economy_controller.resources_required.connect(

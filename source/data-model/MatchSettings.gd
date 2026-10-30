@@ -6,3 +6,4 @@ enum Visibility { PER_PLAYER, ALL_PLAYERS, FULL }
 @export var visibility = Visibility.PER_PLAYER
 @export var visible_player = 0
 @export var mode = Constants.GameMode.NORMAL
+@export var ai_difficulty = Constants.AiDifficulty.DEFAULT

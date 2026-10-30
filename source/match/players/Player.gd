@@ -12,6 +12,8 @@ signal changed
 		emit_changed()
 @export var color = Color.WHITE
 @export var faction = Constants.Faction.DEFAULT
+## multiplies production and construction speed (AI difficulty); 1.0 = normal
+@export var build_speed = 1.0
 
 var _color_material = null
 var _team_color_material = null

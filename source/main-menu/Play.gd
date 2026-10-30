@@ -13,11 +13,13 @@ var _ai_slots_with_manual_faction = {}
 @onready var _map_details = find_child("MapDetailsLabel")
 @onready var _mode_button = find_child("ModeOptionButton")
 @onready var _mode_details = find_child("ModeDetailsLabel")
+@onready var _difficulty_button = find_child("DifficultyOptionButton")
 
 
 func _ready():
 	_setup_map_list()
 	_setup_mode_list()
+	_setup_difficulty_list()
 	_on_map_list_item_selected(0)
 	var option_nodes = find_child("GridContainer").find_children("OptionButton*")
 	for option_node_id in range(option_nodes.size()):
@@ -83,6 +85,28 @@ func _setup_mode_list():
 	_on_mode_selected(0)
 
 
+func _setup_difficulty_list():
+	_difficulty_button.clear()
+	for difficulty in Constants.AiDifficulty.ALL:
+		_difficulty_button.add_item(tr(Constants.AiDifficulty.NAMES[difficulty]))
+	_difficulty_button.select(Constants.AiDifficulty.ALL.find(Constants.AiDifficulty.DEFAULT))
+
+
+func _is_sandbox():
+	return _get_selected_mode() == Constants.GameMode.SANDBOX
+
+
+## Start needs 2+ players, or (sandbox) a human player.
+func _update_start_button():
+	var controllers = _get_option_nodes().map(func(option_node): return option_node.selected)
+	if _is_sandbox():
+		_start_button.disabled = not Constants.PlayerType.HUMAN in controllers
+	else:
+		_start_button.disabled = (
+			controllers.filter(func(c): return c != Constants.PlayerType.NONE).size() < 2
+		)
+
+
 func _get_selected_mode():
 	return Constants.GameMode.ALL[_mode_button.selected]
 
@@ -93,17 +117,22 @@ func _on_mode_selected(index):
 	_mode_details.text = tr(Constants.GameMode.NAMES[mode] + "_DESCRIPTION").format(
 		[starting_resources["resource_a"], starting_resources["resource_b"]]
 	)
+	_difficulty_button.disabled = mode == Constants.GameMode.SANDBOX
+	_update_start_button()
 
 
 func _create_match_settings():
 	var match_settings = MatchSettings.new()
 	match_settings.mode = _get_selected_mode()
+	match_settings.ai_difficulty = Constants.AiDifficulty.ALL[_difficulty_button.selected]
 
 	var option_nodes = _get_option_nodes()
 	var faction_nodes = _get_faction_nodes()
 	var spawn_index_offset = 0
 	for option_node_id in range(option_nodes.size()):
 		var player_controller = option_nodes[option_node_id].selected
+		if _is_sandbox() and player_controller != Constants.PlayerType.HUMAN:
+			player_controller = Constants.PlayerType.NONE  # playing alone: AI slots are ignored
 		if player_controller != Constants.PlayerType.NONE:
 			var player_settings = PlayerSettings.new()
 			player_settings.controller = player_controller
@@ -157,7 +186,6 @@ func _align_player_controls_visibility_to_map(map):
 
 
 func _on_player_selected(selected_option_id, selected_player_id):
-	_start_button.disabled = false
 	_ai_slots_with_manual_faction.erase(selected_player_id)
 	if selected_option_id == Constants.PlayerType.HUMAN:
 		var option_nodes = find_child("GridContainer").find_children("OptionButton*")
@@ -167,12 +195,7 @@ func _on_player_selected(selected_option_id, selected_player_id):
 				and option_nodes[option_node_id].selected == Constants.PlayerType.HUMAN
 			):
 				option_nodes[option_node_id].selected = (Constants.PlayerType.SIMPLE_CLAIRVOYANT_AI)
-	elif selected_option_id == Constants.PlayerType.NONE:
-		var option_nodes_with_player_controllers = _get_option_nodes().filter(
-			func(option_node): return option_node.selected != Constants.PlayerType.NONE
-		)
-		if option_nodes_with_player_controllers.size() < 2:
-			_start_button.disabled = true
+	_update_start_button()
 	_refresh_faction_pickers()
 
 

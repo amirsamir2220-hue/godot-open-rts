@@ -26,4 +26,6 @@ func _process(delta):
 	):
 		queue_free()
 		return
-	_target_unit.construct(delta * Constants.Match.Units.STRUCTURE_CONSTRUCTING_SPEED)
+	_target_unit.construct(
+		delta * Constants.Match.Units.STRUCTURE_CONSTRUCTING_SPEED * _target_unit.player.build_speed
+	)

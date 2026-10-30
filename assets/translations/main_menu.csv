@@ -15,3 +15,9 @@ MODE_NORMAL,Normal,Normalny
 MODE_NORMAL_DESCRIPTION,Start from zero: supply trucks gather supplies and fuel.,"Start od zera: ciężarówki zbierają zaopatrzenie i paliwo."
 MODE_DEATH_MATCH,Death Match,Death Match
 MODE_DEATH_MATCH_DESCRIPTION,"Everyone starts with {0} supplies and {1} fuel. Build a big army fast and fight!","Każdy zaczyna z {0} zaopatrzenia i {1} paliwa. Szybko zbuduj dużą armię i walcz!"
+MODE_SANDBOX,Sandbox (play alone),Piaskownica (gra w pojedynkę)
+MODE_SANDBOX_DESCRIPTION,"Just you, no enemy. Start with {0} supplies and {1} fuel and build your army at your own pace.","Tylko ty, bez wroga. Zaczynasz z {0} zaopatrzenia i {1} paliwa i budujesz armię we własnym tempie."
+AI_DIFFICULTY,AI difficulty,Poziom trudności SI
+DIFFICULTY_EASY,Easy,Łatwy
+DIFFICULTY_NORMAL,Normal,Normalny
+DIFFICULTY_HARD,Hard,Trudny

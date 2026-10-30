@@ -5,7 +5,7 @@ const DynamicCircle2D = preload("res://source/generic-scenes-and-nodes/2d/Dynami
 const DEFAULT_SIZE = Vector2i(100, 100)
 
 @export_range(1, 10) var texture_units_per_world_unit = 2  # px/m
-@export var fog_circle_color = Color(0.25, 0.25, 0.25)
+@export var fog_circle_color = Color(0.55, 0.55, 0.55)  # explored but not in sight
 @export var shroud_circle_color = Color(1.0, 1.0, 1.0)
 
 var _unit_to_circles_mapping = {}

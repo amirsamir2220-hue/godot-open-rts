@@ -5,6 +5,8 @@ uniform vec4 color : source_color = vec4(vec3(0.0), 1.0);
 uniform sampler2D world_visibility_texture : hint_default_white, filter_linear, repeat_disable;
 uniform int texture_units_per_world_unit = 2;
 uniform bool debug_texture_view = false;
+// how dark never-seen areas get (1.0 = fully black); lower keeps the terrain readable
+uniform float max_opacity : hint_range(0.0, 1.0) = 1.0;
 uniform sampler2D depth_texture : hint_depth_texture;
 // set by Globals.gd from the active renderer (Compatibility = OpenGL depth range)
 global uniform bool depth_is_opengl;
@@ -56,7 +58,7 @@ void fragment()
       float transparency_from_world_visibility_texture = 0.0;
       transparency_from_world_visibility_texture =
           textureLod(world_visibility_texture, world_visibility_texture_uv, 0.0).r;
-      ALPHA = max(ALPHA, 1.0 - transparency_from_world_visibility_texture);
+      ALPHA = max(ALPHA, 1.0 - transparency_from_world_visibility_texture) * max_opacity;
     }
     else
     {

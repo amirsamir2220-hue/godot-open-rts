@@ -24,23 +24,70 @@ class Faction:
 class GameMode:
 	const NORMAL = "normal"
 	const DEATH_MATCH = "death_match"  # Generals-style: huge starting money, focus on fighting
-	const ALL = [NORMAL, DEATH_MATCH]
+	const SANDBOX = "sandbox"  # play alone: only the human player, lots of money, no match end
+	const ALL = [NORMAL, DEATH_MATCH, SANDBOX]
 	const NAMES = {
 		NORMAL: "MODE_NORMAL",
 		DEATH_MATCH: "MODE_DEATH_MATCH",
+		SANDBOX: "MODE_SANDBOX",
 	}
 	const STARTING_RESOURCES = {
 		NORMAL: {"resource_a": 0, "resource_b": 0},
 		DEATH_MATCH: {"resource_a": 500, "resource_b": 500},
+		SANDBOX: {"resource_a": 1000, "resource_b": 1000},
 	}
-	# AI players are told to field a bigger army when money is not the limit
-	const AI_OVERRIDES = {
+	# added on top of the AI difficulty settings: a bigger army when money is not the limit
+	const AI_BONUS = {
 		NORMAL: {},
 		DEATH_MATCH:
 		{
+			"expected_number_of_ag_turrets": 1,
+			"expected_number_of_aa_turrets": 1,
+			"expected_number_of_battlegroups": 1,
+			"expected_number_of_units_in_battlegroup": 2,
+		},
+		SANDBOX: {},
+	}
+
+
+class AiDifficulty:
+	const EASY = "easy"
+	const NORMAL = "normal"
+	const HARD = "hard"
+	const ALL = [EASY, NORMAL, HARD]
+	const DEFAULT = EASY
+	const NAMES = {
+		EASY: "DIFFICULTY_EASY",
+		NORMAL: "DIFFICULTY_NORMAL",
+		HARD: "DIFFICULTY_HARD",
+	}
+	# applied to every AI player; build_speed scales its production and construction
+	const SETTINGS = {
+		EASY:
+		{
+			"start_delay_s": 120.0,
+			"build_speed": 0.5,
+			"expected_number_of_ag_turrets": 1,
+			"expected_number_of_aa_turrets": 1,
+			"expected_number_of_battlegroups": 1,
+			"expected_number_of_units_in_battlegroup": 3,
+		},
+		NORMAL:
+		{
+			"start_delay_s": 45.0,
+			"build_speed": 0.75,
+			"expected_number_of_ag_turrets": 1,
+			"expected_number_of_aa_turrets": 1,
+			"expected_number_of_battlegroups": 2,
+			"expected_number_of_units_in_battlegroup": 4,
+		},
+		HARD:
+		{
+			"start_delay_s": 0.0,
+			"build_speed": 1.0,
 			"expected_number_of_ag_turrets": 2,
 			"expected_number_of_aa_turrets": 2,
-			"expected_number_of_battlegroups": 4,
+			"expected_number_of_battlegroups": 3,
 			"expected_number_of_units_in_battlegroup": 6,
 		},
 	}

@@ -64,6 +64,8 @@ during the run) must be fixed.
 - Resources: `resource_a` = **Supplies** (crates), `resource_b` = **Fuel** (drums); internal
   names are unchanged, only display names/models/colors.
 - `tests/manual/TestFactions.tscn` - both factions side by side, all 9 unit types.
+- `source/match/decorations/DesertScatter.gd` - visual-only rocks/shrubs/pebbles (MultiMesh).
+- Model shading: `ModelBuilder` bakes ambient occlusion into vertex colors (`AO_STRENGTH`).
 
 ## Plan
 
@@ -82,6 +84,27 @@ during the run) must be fixed.
   starts with a big pile of supplies/fuel and the AI fields a bigger army).
 - Picked in the Play menu (`ModeOptionButton`), stored in `MatchSettings.mode`, applied in
   `Match._apply_game_mode`. Tune the amounts in `Constants.GameMode.STARTING_RESOURCES`.
+
+### Phase 2C - Sandbox mode and AI difficulty (done)
+- `sandbox` game mode: only the human player, 1000 supplies / 1000 fuel, no match end
+  (`MatchEndHandler` removed). AI slots are ignored and Start works with just a human.
+- `Constants.AiDifficulty` (Easy default / Normal / Hard), picked in the Play menu and stored in
+  `MatchSettings.ai_difficulty`. Each level sets the AI's `start_delay_s`, `build_speed`
+  (production + construction speed, `Player.build_speed`) and army size; Death Match adds
+  `GameMode.AI_BONUS` on top. The human's `build_speed` is always 1.0.
+- In-match "How to play" panel (`hud/ControlsHelp.gd`, H key or "?" button).
+- Fog of war is see-through (`max_opacity` 0.8, explored areas lighter) so the map stays readable.
+
+### Phase 3C - Realistic models (next, needs assets)
+- The owner wants **realistic, not cartoon** models. Code-built models stay as fallback.
+- Sources: Sketchfab (CC BY, downloadable, low face count) is the main candidate; the cloud
+  environment must allow `sketchfab.com` / `api.sketchfab.com` and downloads need the owner's
+  free Sketchfab API token. Otherwise the owner downloads `.glb` files and uploads them to
+  `assets/models/realistic/<faction>/<Type>.glb` via GitHub.
+- Budget per unit for Intel UHD: about 2-8k triangles, 1-2 materials, textures <= 1024 px.
+- Integrate through `FactionModels.MODEL_OVERRIDES` with a wrapper scene per model that fixes
+  scale/orientation (-Z forward) and provides `Turret`, `Rotor`, `ProjectileOrigin` nodes.
+- Credit every CC BY model in `LOGO_LICENSES.md`/Credits.
 
 ### Phase 3 - Models
 Low-poly models per faction for all 9 unit types:
@@ -188,8 +211,10 @@ Design rules:
 - [x] Phase 1 - Performance
 - [x] Phase 2 - Factions
 - [x] Phase 2B - Game modes: Death Match
+- [x] Phase 2C - Sandbox mode, AI difficulty, controls help
 - [x] Phase 3 - Models
 - [x] Phase 3B - Motion
+- [ ] Phase 3C - Realistic models (waiting for asset access)
 - [x] Phase 4 - UI
 - [x] Phase 5 - Desert look
 - [ ] Phase 6 - Graphics settings menu

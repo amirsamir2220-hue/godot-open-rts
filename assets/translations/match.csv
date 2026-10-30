@@ -49,3 +49,13 @@ USA_AG_TURRET,Javelin post,Stanowisko Javelin
 RUSSIA_AG_TURRET,Kornet post,Stanowisko Kornet
 USA_AA_TURRET,Patriot battery,Bateria Patriot
 RUSSIA_AA_TURRET,Pantsir-S1,Pancyr-S1
+HELP_TITLE,How to play,Jak grać
+HELP_CAMERA,"Move the camera: W A S D, or push the mouse against the screen edge.","Ruch kamery: W A S D lub mysz przy krawędzi ekranu."
+HELP_ZOOM_ROTATE,"Zoom: mouse wheel. Rotate: Q / E, or hold the middle mouse button.","Przybliżenie: kółko myszy. Obrót: Q / E lub środkowy przycisk myszy."
+HELP_SELECT,"Select: left-click a unit or drag a box around units. Double-click selects all units of that kind. Hold Shift to add.","Zaznaczanie: lewy klik lub przeciągnij ramkę. Podwójny klik zaznacza wszystkie jednostki tego typu. Shift dodaje."
+HELP_MOVE_ATTACK,"Move / attack: right-click the ground or an enemy.","Ruch / atak: prawy klik na ziemi lub wrogu."
+HELP_BUILD,"Build: select a supply truck, pick a building in the bottom-right panel, left-click to place it (R rotates, right-click cancels).","Budowa: zaznacz ciężarówkę, wybierz budynek w panelu w prawym dolnym rogu, lewy klik stawia (R obraca, prawy klik anuluje)."
+HELP_TRAIN,"Train units: select the Command HQ, War factory or Helipad and click a unit button.","Produkcja: zaznacz kwaterę główną, fabrykę lub lądowisko i kliknij przycisk jednostki."
+HELP_RESOURCES,"Supplies and fuel: supply trucks collect them from crates and drums automatically.","Zaopatrzenie i paliwo: ciężarówki same zbierają je ze skrzyń i beczek."
+HELP_GROUPS,"Groups: Ctrl + 1..9 saves a group, 1..9 selects it. Esc: menu. H: this help.","Grupy: Ctrl + 1..9 zapisuje grupę, 1..9 ją zaznacza. Esc: menu. H: ta pomoc."
+HELP_CLOSE,Got it,Rozumiem

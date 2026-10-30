@@ -6,6 +6,7 @@ const Player = preload("res://source/match/players/Player.gd")
 const Human = preload("res://source/match/players/human/Human.gd")
 
 const DesertScatter = preload("res://source/match/decorations/DesertScatter.gd")
+const ControlsHelp = preload("res://source/match/hud/ControlsHelp.gd")
 
 const CommandCenter = preload("res://source/match/units/CommandCenter.tscn")
 const Drone = preload("res://source/match/units/Drone.tscn")
@@ -36,12 +37,18 @@ func _enter_tree():
 
 
 func _ready():
+	if _get_mode() == Constants.GameMode.SANDBOX and find_child("MatchEndHandler") != null:
+		find_child("MatchEndHandler").queue_free()  # playing alone never ends in victory/defeat
 	MatchSignals.setup_and_spawn_unit.connect(_setup_and_spawn_unit)
 	_setup_subsystems_dependent_on_map()
 	_setup_players()
 	_setup_player_units()
 	visible_player = get_tree().get_nodes_in_group("players")[settings.visible_player]
 	_move_camera_to_initial_position()
+	if _get_human_player() != null:
+		var controls_help = ControlsHelp.new()
+		controls_help.name = "ControlsHelp"
+		find_child("HUD").add_child(controls_help)
 	if settings.visibility == settings.Visibility.FULL:
 		fog_of_war.reveal()
 
@@ -121,17 +128,30 @@ func _create_players_from_settings():
 		_players.add_child(player)
 
 
+func _get_mode():
+	return settings.mode if settings.mode in Constants.GameMode.ALL else Constants.GameMode.NORMAL
+
+
 func _apply_game_mode(player):
-	var mode = (
-		settings.mode if settings.mode in Constants.GameMode.ALL else Constants.GameMode.NORMAL
-	)
+	var mode = _get_mode()
 	var starting_resources = Constants.GameMode.STARTING_RESOURCES[mode]
 	for resource in starting_resources:
 		player.set(resource, starting_resources[resource])
-	var ai_overrides = Constants.GameMode.AI_OVERRIDES[mode]
-	for property in ai_overrides:
+	if player is Human:
+		return
+	var difficulty = (
+		settings.ai_difficulty
+		if settings.ai_difficulty in Constants.AiDifficulty.ALL
+		else Constants.AiDifficulty.DEFAULT
+	)
+	var ai_settings = Constants.AiDifficulty.SETTINGS[difficulty]
+	for property in ai_settings:
 		if property in player:
-			player.set(property, ai_overrides[property])
+			player.set(property, ai_settings[property])
+	var ai_bonus = Constants.GameMode.AI_BONUS[mode]
+	for property in ai_bonus:
+		if property in player:
+			player.set(property, player.get(property) + ai_bonus[property])
 
 
 func _setup_player_units():
