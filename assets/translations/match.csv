@@ -50,7 +50,7 @@ RUSSIA_AG_TURRET,Kornet post,Stanowisko Kornet
 USA_AA_TURRET,Patriot battery,Bateria Patriot
 RUSSIA_AA_TURRET,Pantsir-S1,Pancyr-S1
 HELP_TITLE,How to play,Jak grać
-HELP_CAMERA,"Move the camera: W A S D, or push the mouse against the screen edge.","Ruch kamery: W A S D lub mysz przy krawędzi ekranu."
+HELP_CAMERA,"Move the camera: W A S D or the arrow keys, push the mouse to the screen edge, or left-click the minimap.","Ruch kamery: W A S D lub strzałki, mysz przy krawędzi ekranu albo klik na minimapie."
 HELP_ZOOM_ROTATE,"Zoom: mouse wheel. Rotate: Q / E, or hold the middle mouse button.","Przybliżenie: kółko myszy. Obrót: Q / E lub środkowy przycisk myszy."
 HELP_SELECT,"Select: left-click a unit or drag a box around units. Double-click selects all units of that kind. Hold Shift to add.","Zaznaczanie: lewy klik lub przeciągnij ramkę. Podwójny klik zaznacza wszystkie jednostki tego typu. Shift dodaje."
 HELP_MOVE_ATTACK,"Move / attack: right-click the ground or an enemy.","Ruch / atak: prawy klik na ziemi lub wrogu."
